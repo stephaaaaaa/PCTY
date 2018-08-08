@@ -10,7 +10,26 @@
         </p>
     </div>
 
+
+
     <div class="row">
+
+        <div class="col-md-4">
+            <h2>Add an employee</h2>
+            <p>
+                Add your employee's information, along with information about any dependents.
+            </p>
+            <p>
+                <asp:LinkButton
+                    runat="server"
+                    CssClass="btn btn-default"
+                    OnClick="Click_AddEmployee">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Add
+                </asp:LinkButton>
+            </p>
+        </div>
+
         <div class="col-md-4">
             <h2>View Employees</h2>
             <p>
@@ -41,21 +60,6 @@
                     OnClick="Click_ModifyEmployees">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>                   
                     Modify
-                </asp:LinkButton>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Add an employee</h2>
-            <p>
-                Add your employee's information, along with information about any dependents.
-            </p>
-            <p>
-                <asp:LinkButton
-                    runat="server"
-                    CssClass="btn btn-default"
-                    OnClick="Click_AddEmployee">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Add
                 </asp:LinkButton>
             </p>
         </div>
