@@ -13,5 +13,10 @@ namespace BenefitsCalculation
         {
 
         }
+
+        protected void Button_AddDependent_Click(object sender, EventArgs e)
+        {
+            Panel_AddDependents.Visible = true;
+        }
     }
 }
