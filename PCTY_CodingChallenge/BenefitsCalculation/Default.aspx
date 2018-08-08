@@ -4,10 +4,10 @@
 
     <div class="jumbotron">
         <h1>Employee Benefits Calculator</h1>
-        <p class="lead">Welcome to your employee benefits calculator. From this landing page, you can view, add,
+        <p class="lead">
+            Welcome to your employee benefits calculator. From this landing page, you can view, add,
             modify, or remove employees whose benefits packages you are keeping track of, or view all your employees.
         </p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
     </div>
 
     <div class="row">
@@ -15,10 +15,16 @@
             <h2>View Employees</h2>
             <p>
                 Get an birds-eye view of who you're keeping track of. Any modifications that come to mind, can
-                also be taken care of, from here.
+                also be taken care of from here.
             </p>
             <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
+                <asp:LinkButton
+                    runat="server"
+                    CssClass="btn btn-default"
+                    OnClick="Click_ViewEmployees">
+                    <i class="fa fa-address-card-o" aria-hidden="true"></i>
+                    View
+                </asp:LinkButton>
             </p>
         </div>
         <div class="col-md-4">
@@ -29,7 +35,13 @@
                 or remove the employee.
             </p>
             <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
+                <asp:LinkButton
+                    runat="server"
+                    CssClass="btn btn-default"
+                    OnClick="Click_ModifyEmployees">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>                   
+                    Modify
+                </asp:LinkButton>
             </p>
         </div>
         <div class="col-md-4">
@@ -38,7 +50,13 @@
                 Add your employee's information, along with information about any dependents.
             </p>
             <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
+                <asp:LinkButton
+                    runat="server"
+                    CssClass="btn btn-default"
+                    OnClick="Click_AddEmployee">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Add
+                </asp:LinkButton>
             </p>
         </div>
     </div>

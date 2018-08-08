@@ -13,5 +13,20 @@ namespace BenefitsCalculation
         {
 
         }
+
+        protected void Click_ViewEmployees(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ViewEmployees");
+        }
+
+        protected void Click_ModifyEmployees(object sender, EventArgs e)
+        {
+            Response.Redirect("~/ModifyEmployee");
+        }
+
+        protected void Click_AddEmployee(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AddEmployee");
+        }
     }
 }
