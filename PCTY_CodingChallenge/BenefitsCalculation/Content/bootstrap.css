@@ -5,7 +5,7 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 html {
-  font-family: sans-serif;
+  font-family: Karla;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
@@ -105,7 +105,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: monospace, monospace;
+  font-family: Karla;
   font-size: 1em;
 }
 button,
@@ -1082,7 +1082,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Karla;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
@@ -1092,7 +1092,7 @@ input,
 button,
 select,
 textarea {
-  font-family: inherit;
+  font-family: Karla;
   font-size: inherit;
   line-height: inherit;
 }
@@ -5990,7 +5990,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Karla;
   font-size: 12px;
   font-style: normal;
   font-weight: normal;
@@ -6109,7 +6109,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Karla;
   font-size: 14px;
   font-style: normal;
   font-weight: normal;
@@ -6753,5 +6753,10 @@ button.close {
   .hidden-print {
     display: none !important;
   }
+}
+
+@font-face {
+    font-family: "Karla";
+    src: url(karla-v6-latin-regular.woff);
 }
 /*# sourceMappingURL=bootstrap.css.map */
