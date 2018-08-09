@@ -27,27 +27,41 @@ namespace BenefitsCalculation
         {
             numberOfDependents = int.Parse(TextBoxNumberOfDependents.Text);
 
-            TextBox[] textBoxes = new TextBox[numberOfDependents];
-            Label[] labels = new Label[numberOfDependents];
+            Label[] fName_labels = new Label[numberOfDependents];
+            TextBox[] fName_TextBoxes = new TextBox[numberOfDependents];
+
+            Label[] lName_labels = new Label[numberOfDependents];
+            TextBox[] lName_TextBoxes = new TextBox[numberOfDependents];
 
             for (int i = 0; i < numberOfDependents; i++)
             {
-                labels[i] = new Label();
-                labels[i].CssClass = "col-lg-2";
-                labels[i].Text = "Dependent name";
-                // Here you can modify the value of the label which is at labels[i]
+                fName_labels[i] = new Label();
+                fName_labels[i].CssClass = "col-lg-2";
+                fName_labels[i].Text = $"Dependent {i+1} first name";
 
-                textBoxes[i] = new TextBox();
-                textBoxes[i].CssClass = "form-control";
-                // Here you can modify the value of the textbox which is at textBoxes[i]
+                fName_TextBoxes[i] = new TextBox();
+                fName_TextBoxes[i].CssClass = "form-control";
+
+                lName_labels[i] = new Label();
+                lName_labels[i].CssClass = "col-lg-2";
+                lName_labels[i].Text = $"Dependent {i+1} last name";
+                
+                lName_TextBoxes[i] = new TextBox();
+                lName_TextBoxes[i].CssClass = "form-control";
 
             }
 
-            // This adds the controls to the form (you will need to specify thier co-ordinates etc. first)
+            // This adds the controls to the form (you will need to specify co-ordinates etc. first)
             for (int i = 0; i < numberOfDependents; i++)
             {
-                Panel_DependentsFields.Controls.Add(textBoxes[i]);
-                Panel_DependentsFields.Controls.Add(labels[i]);
+                //Panel_DependentsFields.Attributes.Add("class", "row");
+                Panel_DependentsFields.Controls.Add(fName_labels[i]);
+                Panel_DependentsFields.Controls.Add(fName_TextBoxes[i]);
+                Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
+                Panel_DependentsFields.Controls.Add(lName_labels[i]);
+                Panel_DependentsFields.Controls.Add(lName_TextBoxes[i]);
+                Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
+                Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
             }
             Panel_DependentsFields.Visible = true;
         }
