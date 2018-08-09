@@ -6,7 +6,7 @@
         <h1>Employee Benefits Calculator</h1>
         <p class="lead">
             Welcome to your employee benefits calculator. From this landing page, you can view, add,
-            modify, or remove employees whose benefits packages you are keeping track of, or view all your employees.
+            modify, or remove employees whose benefits packages you are keeping track of.
         </p>
     </div>
 
