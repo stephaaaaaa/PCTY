@@ -234,6 +234,8 @@
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="DependentObject.cs" />
+    <Compile Include="EmployeeData.cs" />
+    <Compile Include="EmployeeTracker.cs" />
     <Compile Include="EmployeeObject.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

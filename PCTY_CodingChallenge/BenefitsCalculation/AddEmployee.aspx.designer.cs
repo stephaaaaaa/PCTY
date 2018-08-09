@@ -22,6 +22,24 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.Panel Panel_AddSingleEmployee;
         
         /// <summary>
+        /// TextBox_EmployeeFirstName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_EmployeeFirstName;
+        
+        /// <summary>
+        /// TextBox_EmployeeLastName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_EmployeeLastName;
+        
+        /// <summary>
         /// Button_AddDependent control.
         /// </summary>
         /// <remarks>
@@ -38,5 +56,32 @@ namespace BenefitsCalculation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel Panel_AddDependents;
+        
+        /// <summary>
+        /// TextBoxNumberOfDependents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBoxNumberOfDependents;
+        
+        /// <summary>
+        /// Button_GenerateDependentFields control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton Button_GenerateDependentFields;
+        
+        /// <summary>
+        /// Panel_DependentsFields control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel_DependentsFields;
     }
 }
