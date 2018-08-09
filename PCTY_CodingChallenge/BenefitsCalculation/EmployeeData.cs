@@ -8,6 +8,7 @@ namespace BenefitsCalculation
 
     public class EmployeeData
     {
-        public static EmployeeTracker employees;
+        public static EmployeeTracker tracker = new EmployeeTracker();
     }
+
 }

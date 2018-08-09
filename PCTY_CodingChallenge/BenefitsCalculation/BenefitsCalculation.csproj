@@ -164,7 +164,10 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\roboto-slab-v7-latin-regular.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Images\pcty_benefitscalculator_white.png" />
+    <Content Include="Images\pcty_challengeLogo_webSize.png" />
     <Content Include="ModifyEmployee.aspx" />
     <Content Include="pcty_favicon.ico" />
     <Content Include="Scripts\bootstrap.js" />

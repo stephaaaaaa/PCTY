@@ -13,6 +13,18 @@ namespace BenefitsCalculation
         public EmployeeTracker()
         {
             employees = new List<EmployeeObject>();
+            initializeTestEmployees();
+        }
+
+        private void initializeTestEmployees()
+        {
+            EmployeeObject charlieKelly = new EmployeeObject("Charlie", "Kelly", false);
+            employees.Add(charlieKelly);
+            EmployeeObject frankReynolds = new EmployeeObject("Frank", "Reynolds", false);
+            employees.Add(frankReynolds);
+            EmployeeObject bojackH = new EmployeeObject("Bojack", "Horseman", false);
+            employees.Add(bojackH);
+
         }
 
         public void addEmployee(EmployeeObject newEmployee)

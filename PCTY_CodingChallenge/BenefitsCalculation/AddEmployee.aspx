@@ -48,13 +48,19 @@
             </asp:RegularExpressionValidator>
         </div>
         <br />
-        <div class="row">
+        <div class="row col-lg-6">
             <asp:Button
                 runat="server"
                 ID="Button_AddDependent"
-                CssClass="col-lg-2 btn"
+                CssClass="btn"
                 OnClick="Button_AddDependent_Click"
                 Text="Add Dependents" />
+            <asp:Button
+                runat="server"
+                ID="Button_SubmitEmployeeWithNoDependents"
+                CssClass="btn "
+                OnClick="Button_SubmitEmployeeWithNoDependents_Click"
+                Text="Submit" />
         </div>
         <br />
 

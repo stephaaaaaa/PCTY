@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
-        <h1>Employee Benefits Calculator</h1>
+        <h1 style="font-family:;">Employee Benefits Calculator</h1>
         <p class="lead">
             Welcome to your employee benefits calculator. From this landing page, you can view, add,
             modify, or remove employees whose benefits packages you are keeping track of.

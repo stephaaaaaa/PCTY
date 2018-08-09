@@ -48,7 +48,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">PCTY Employee Benefits Calculator</a>
+                    <img src="Images/pcty_benefitscalculator_white.png" />
+                    <%--<img src="Images/pcty_challengeLogo_webSize.png" />--%>
+                    
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">

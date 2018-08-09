@@ -6759,4 +6759,10 @@ button.close {
     font-family: "Karla";
     src: url(karla-v6-latin-regular.woff);
 }
+
+@font-face {
+    font-family: "Roboto-Slab";
+    src: url(roboto-slab-v7-latin-regular.woff)
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

@@ -11,6 +11,11 @@ namespace BenefitsCalculation
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            foreach (EmployeeObject emp in EmployeeData.tracker.viewEmployees())
+            {
+                td_EmployeeFirstName.InnerText = emp.getFirstName();
+
+            }
 
         }
     }

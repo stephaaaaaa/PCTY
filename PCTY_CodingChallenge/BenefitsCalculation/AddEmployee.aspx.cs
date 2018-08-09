@@ -65,5 +65,14 @@ namespace BenefitsCalculation
             }
             Panel_DependentsFields.Visible = true;
         }
+
+        protected void Button_SubmitEmployeeWithNoDependents_Click(object sender, EventArgs e)
+        {
+            string fname = TextBox_EmployeeFirstName.Text;
+            string lname = TextBox_EmployeeLastName.Text;
+
+            EmployeeObject newEmployee = new EmployeeObject(fname, lname, false);
+            EmployeeData.tracker.addEmployee(newEmployee);
+        }
     }
 }
