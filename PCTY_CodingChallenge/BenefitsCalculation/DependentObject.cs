@@ -7,9 +7,9 @@ namespace BenefitsCalculation
 {
     public class DependentObject
     {
-        private static string firstName;
-        private static string lastName;
-        private static string respectiveDependent;
+        private string firstName;
+        private string lastName;
+        private string respectiveDependent;
 
         public DependentObject(string fname, string lname, string parentOrSpouse)
         {

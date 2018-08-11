@@ -109,9 +109,8 @@ namespace BenefitsCalculation
 
             string dep_firstName = "";
             string dep_lastName = "";
-            for (int i = 0; i < Request.Form.Count; i++)
+            for (int i = 0; i < Request.Form.Count - newEmployee.getDependentsCount(); i++)
             {
-
                 if (Request.Form.AllKeys[i].Contains("dep_FirstName")) // indicates that the text boxes exist
                 {
 
@@ -123,28 +122,27 @@ namespace BenefitsCalculation
                     if (ControlName[0] == "dep_FirstName")
                     {
                         dep_firstName = Request.Form[i];
-                        continue;
                     }
-                }
-
-                if (Request.Form.AllKeys[i].Contains("dep_LastName")) // indicates that the text boxes exist
-                {
-                    int ParamStartPoint = Request.Form.AllKeys[i].IndexOf("dep_Last");
-                    int ParamNameLength = Request.Form.AllKeys[i].Length - ParamStartPoint - 1;
-
-                    string[] ControlName = Request.Form.AllKeys[i].Substring(ParamStartPoint, ParamNameLength).Split('$');
-
-                    if (ControlName[0] == "dep_LastName")
+                    i++;
+                    if (Request.Form.AllKeys[i].Contains("dep_LastName")) // indicates that the text boxes exist
                     {
-                        dep_lastName = Request.Form[i];
+                        int ParamStartPoint2 = Request.Form.AllKeys[i].IndexOf("dep_Last");
+                        int ParamNameLength2 = Request.Form.AllKeys[i].Length - ParamStartPoint2 - 1;
+
+                        string[] ControlName2 = Request.Form.AllKeys[i].Substring(ParamStartPoint2, ParamNameLength2).Split('$');
+
+                        if (ControlName2[0] == "dep_LastName")
+                        {
+                            dep_lastName = Request.Form[i];
+                        }
                     }
+                    DependentObject newDependent = new DependentObject(dep_firstName, dep_lastName, newEmployee.getFullName());
+                    newEmployee.addDependent(newDependent);
                 }
 
-                DependentObject newDependent = new DependentObject(dep_firstName, dep_lastName, newEmployee.getFullName());
-                newEmployee.addDependent(newDependent);
             }
-
             PeopleData.tracker.addEmployee(newEmployee);
+
         }
     }
 }
