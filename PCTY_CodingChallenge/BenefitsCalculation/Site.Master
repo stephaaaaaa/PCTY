@@ -13,12 +13,11 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-
-
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/pcty_favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="Content/font-awesome.css" rel="stylesheet" />
     <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/custom-override.css" rel="stylesheet" />
 
 </head>
 <body>

@@ -64,53 +64,73 @@
         </div>
         <br />
         <br />
-        <br/>
-
-    </asp:Panel>
-
-    <asp:Panel runat="server" ID="Panel_AddDependents" Visible="false">
-
-        <div class="row">
-            <asp:Label
-                runat="server"
-                CssClass="col-lg-2">
-                Number of dependents
-            </asp:Label>
-            <div class="col-sm-2">
-                <asp:TextBox
-                    runat="server"
-                    ID="TextBoxNumberOfDependents"
-                    CssClass="form-control">
-                </asp:TextBox>
-            </div>
-            <asp:LinkButton runat="server"
-                ID="Button_GenerateDependentFields"
-                CssClass="btn btn-default"
-                OnClick="Button_GenerateDependentFields_Click">
-                    Generate dependent fields
-            </asp:LinkButton>
-        </div>
         <br />
 
-        <div class="row">
-            <asp:RequiredFieldValidator
-                runat="server"
-                ControlToValidate="TextBoxNumberOfDependents"
-                ErrorMessage="*Please enter a number of dependents. 0 for no dependents."
-                ForeColor="#db1a32">
-            </asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator
-                runat="server"
-                ControlToValidate="TextBoxNumberOfDependents"
-                ValidationExpression="^\d+$"
-                ErrorMessage="*Number of dependents must be 0, or a whole number"
-                ForeColor="#db1a32">
-            </asp:RegularExpressionValidator>
-        </div>
-
     </asp:Panel>
 
-    <asp:Panel runat="server" ID="Panel_DependentsFields" Visible="false">
-    </asp:Panel>
+    <div class="row col-lg-12">
+        <asp:Panel runat="server" ID="Panel_AddDependents" Visible="false">
+            <div class="row">
+                <asp:Label
+                    runat="server"
+                    CssClass="col-lg-2">
+                Number of dependents
+                </asp:Label>
+                <div class="col-sm-2">
+                    <asp:TextBox
+                        runat="server"
+                        ID="TextBoxNumberOfDependents"
+                        CssClass="form-control">
+                    </asp:TextBox>
+                </div>
+                <asp:LinkButton runat="server"
+                    ID="Button_GenerateDependentFields"
+                    CssClass="btn btn-default"
+                    OnClick="Button_GenerateDependentFields_Click">
+                    Generate dependent fields
+                </asp:LinkButton>
+            </div>
+            <br />
+
+            <div class="row">
+                <asp:RequiredFieldValidator
+                    runat="server"
+                    ControlToValidate="TextBoxNumberOfDependents"
+                    ErrorMessage="*Please enter a number of dependents."
+                    ForeColor="#db1a32">
+                </asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator
+                    runat="server"
+                    ControlToValidate="TextBoxNumberOfDependents"
+                    ValidationExpression="^\d+$"
+                    ErrorMessage="*Number of dependents must be a whole number"
+                    ForeColor="#db1a32">
+                </asp:RegularExpressionValidator>
+            </div>
+        </asp:Panel>
+    </div>
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <div class="row col-lg-12">
+        <asp:Panel runat="server" ID="Panel_DependentsFields" Visible="false">
+            
+        </asp:Panel>
+    </div>
+
+    <div class="row">
+        <asp:Panel runat="server" ID="Panel_SubmitWithDependents" Visible="false">
+            <div class="row col-lg-12">
+                <asp:Button
+                    runat="server"
+                    CssClass="btn bottom "
+                    Text="Submit" ID="Button_SubmitWithDependents"
+                    OnClick="Button_SubmitWithDependents_Click" />
+            </div>
+        </asp:Panel>
+    </div>
 
 </asp:Content>

@@ -10,10 +10,16 @@ namespace BenefitsCalculation
     public partial class AddEmployee : System.Web.UI.Page
     {
         private int numberOfDependents;
+        private Button submitEmployeeAndDependents;
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void Button_SubmitEmployeeAndDependents_Click(object sender, EventArgs e)
+        {
+            Response.Write("I've been clicked!");
         }
 
         protected void Button_AddDependent_Click(object sender, EventArgs e)
@@ -45,7 +51,7 @@ namespace BenefitsCalculation
             for (int i = 0; i < numberOfDependents; i++)
             {
                 fName_labels[i] = new Label();
-                fName_labels[i].CssClass = "col-lg-2";
+                fName_labels[i].CssClass = "row col-lg-2";
                 fName_labels[i].Text = $"Dependent {i + 1} first name";
 
                 fName_TextBoxes[i] = new TextBox();
@@ -54,7 +60,7 @@ namespace BenefitsCalculation
                 namesRegExValidator.ControlToValidate = fName_TextBoxes[i].Text;
 
                 lName_labels[i] = new Label();
-                lName_labels[i].CssClass = "col-lg-2";
+                lName_labels[i].CssClass = "row col-lg-2";
                 lName_labels[i].Text = $"Dependent {i + 1} last name";
 
 
@@ -68,24 +74,20 @@ namespace BenefitsCalculation
             // This adds the controls to the form (you will need to specify co-ordinates etc. first)
             for (int i = 0; i < numberOfDependents; i++)
             {
-                //Panel_DependentsFields.Attributes.Add("class", "row");
+                Panel_DependentsFields.Attributes.Add("class", "row");
                 Panel_DependentsFields.Controls.Add(fName_labels[i]);
                 Panel_DependentsFields.Controls.Add(fName_TextBoxes[i]);
-                Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
+                Panel_DependentsFields.Attributes.Add("class", "row");
+                //Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
                 Panel_DependentsFields.Controls.Add(lName_labels[i]);
                 Panel_DependentsFields.Controls.Add(lName_TextBoxes[i]);
-                Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
-                Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
+                Panel_DependentsFields.Attributes.Add("class", "row");
+                //Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
+                //Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
             }
-            Button submitEmployeeAndDependents = new Button();
-            submitEmployeeAndDependents.ID = "Button_SubmitEmployeeAndDependents";
-            submitEmployeeAndDependents.CssClass = "btn";
-            submitEmployeeAndDependents.Text = "Submit";
-            //The shit below don't work
-            //submitEmployeeAndDependents.Click += new EventHandler(this.Button_SubmitEmployeeAndDependents); ;
-
-            Panel_DependentsFields.Controls.Add(submitEmployeeAndDependents);
+            Panel_DependentsFields.CssClass = "row";
             Panel_DependentsFields.Visible = true;
+            Panel_SubmitWithDependents.Visible=true;
         }
 
         protected void Button_SubmitEmployeeWithNoDependents_Click(object sender, EventArgs e)
@@ -95,6 +97,11 @@ namespace BenefitsCalculation
 
             EmployeeObject newEmployee = new EmployeeObject(fname, lname, false);
             EmployeeData.tracker.addEmployee(newEmployee);
+        }
+
+        protected void Button_SubmitWithDependents_Click(object sender, EventArgs e)
+        {
+            Response.Write("clicked!");
         }
     }
 }
