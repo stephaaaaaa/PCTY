@@ -6,9 +6,9 @@ using System.Web;
 namespace BenefitsCalculation
 {
 
-    public class EmployeeData
+    public class PeopleData
     {
-        public static EmployeeTracker tracker = new EmployeeTracker();
+        public static PeopleTracker tracker = new PeopleTracker();
     }
 
 }

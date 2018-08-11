@@ -11,7 +11,7 @@ namespace BenefitsCalculation
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            foreach (EmployeeObject emp in EmployeeData.tracker.viewEmployees())
+            foreach (EmployeeObject emp in PeopleData.tracker.viewEmployees())
             {
                 TableRow row = new TableRow();
                 TableCell idCell = new TableCell();

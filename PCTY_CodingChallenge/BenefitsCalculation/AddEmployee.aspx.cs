@@ -10,16 +10,12 @@ namespace BenefitsCalculation
     public partial class AddEmployee : System.Web.UI.Page
     {
         private int numberOfDependents;
-        private Button submitEmployeeAndDependents;
+        private TextBox[] fName_TextBoxes;
+        private TextBox[] lName_TextBoxes;
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void Button_SubmitEmployeeAndDependents_Click(object sender, EventArgs e)
-        {
-            Response.Write("I've been clicked!");
         }
 
         protected void Button_AddDependent_Click(object sender, EventArgs e)
@@ -37,11 +33,10 @@ namespace BenefitsCalculation
             namesFieldValidtor.ForeColor.Equals("#db1a32");
 
             Label[] fName_labels = new Label[numberOfDependents];
-
-            TextBox[] fName_TextBoxes = new TextBox[numberOfDependents];
+            fName_TextBoxes = new TextBox[numberOfDependents];
 
             Label[] lName_labels = new Label[numberOfDependents];
-            TextBox[] lName_TextBoxes = new TextBox[numberOfDependents];
+            lName_TextBoxes = new TextBox[numberOfDependents];
 
             RegularExpressionValidator namesRegExValidator = new RegularExpressionValidator();
             namesRegExValidator.ErrorMessage = "Do not include symbols other than numerals, punctuation marks, or letters.";
@@ -71,19 +66,20 @@ namespace BenefitsCalculation
 
             }
 
-            // This adds the controls to the form (you will need to specify co-ordinates etc. first)
             for (int i = 0; i < numberOfDependents; i++)
             {
                 Panel_DependentsFields.Attributes.Add("class", "row");
                 Panel_DependentsFields.Controls.Add(fName_labels[i]);
                 Panel_DependentsFields.Controls.Add(fName_TextBoxes[i]);
                 Panel_DependentsFields.Attributes.Add("class", "row");
-                //Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
+                Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
                 Panel_DependentsFields.Controls.Add(lName_labels[i]);
                 Panel_DependentsFields.Controls.Add(lName_TextBoxes[i]);
                 Panel_DependentsFields.Attributes.Add("class", "row");
-                //Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
-                //Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
+                Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
+                DependentObject newDependent = new DependentObject($"{fName_TextBoxes[i].Text}", $"{lName_TextBoxes[i].Text}", 
+                    $"{TextBox_EmployeeFirstName.Text} {TextBox_EmployeeLastName.Text}");
+                PeopleData.tracker.addDependent(newDependent);
             }
             Panel_DependentsFields.CssClass = "row";
             Panel_DependentsFields.Visible = true;
@@ -96,12 +92,25 @@ namespace BenefitsCalculation
             string lname = TextBox_EmployeeLastName.Text;
 
             EmployeeObject newEmployee = new EmployeeObject(fname, lname, false);
-            EmployeeData.tracker.addEmployee(newEmployee);
+            PeopleData.tracker.addEmployee(newEmployee);
         }
 
         protected void Button_SubmitWithDependents_Click(object sender, EventArgs e)
         {
-            Response.Write("clicked!");
+            string employee_fname = TextBox_EmployeeFirstName.Text;
+            string employee_lname = TextBox_EmployeeLastName.Text;
+
+            EmployeeObject newEmployee = new EmployeeObject(employee_fname, employee_lname, true);
+            newEmployee.setNumberOfDependents(int.Parse(TextBoxNumberOfDependents.Text));
+
+            foreach (DependentObject dependent in PeopleData.tracker.viewDependents())
+            {
+                if (dependent.getProvider().Equals($"{employee_fname} {employee_lname}"))
+                {
+                    newEmployee.addDependent(dependent);
+                }
+            }
+            PeopleData.tracker.addEmployee(newEmployee);
         }
     }
 }

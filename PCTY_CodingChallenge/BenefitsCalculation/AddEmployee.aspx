@@ -117,7 +117,6 @@
 
     <div class="row col-lg-12">
         <asp:Panel runat="server" ID="Panel_DependentsFields" Visible="false">
-            
         </asp:Panel>
     </div>
 
@@ -127,7 +126,8 @@
                 <asp:Button
                     runat="server"
                     CssClass="btn bottom "
-                    Text="Submit" ID="Button_SubmitWithDependents"
+                    Text="Submit"
+                    ID="Button_SubmitWithDependents"
                     OnClick="Button_SubmitWithDependents_Click" />
             </div>
         </asp:Panel>

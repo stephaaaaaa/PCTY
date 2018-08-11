@@ -6,13 +6,15 @@ using System.Web;
 namespace BenefitsCalculation
 {
 
-    public class EmployeeTracker
+    public class PeopleTracker
     {
         private static List<EmployeeObject> employees;
+        private static List<DependentObject> dependents;
 
-        public EmployeeTracker()
+        public PeopleTracker()
         {
             employees = new List<EmployeeObject>();
+            dependents = new List<DependentObject>();
             initializeTestEmployees();
         }
 
@@ -32,6 +34,11 @@ namespace BenefitsCalculation
             employees.Add(newEmployee);
         }
 
+        public void addDependent(DependentObject newDependent)
+        {
+            dependents.Add(newDependent);
+        }
+
         public void removeEmployee(EmployeeObject employeeToRemove)
         {
             foreach (EmployeeObject employee in employees)
@@ -44,9 +51,26 @@ namespace BenefitsCalculation
             }
         }
 
+        public void removeDependent(DependentObject dependentToRemove)
+        {
+            foreach (DependentObject dependent in dependents)
+            {
+                if (dependent.Equals(dependentToRemove))
+                {
+                    dependents.Remove(dependent);
+                }
+                //Add a catch for if the dependent doesn't exist
+            }
+        }
+
         public List<EmployeeObject> viewEmployees()
         {
             return employees;
+        }
+
+        public List<DependentObject> viewDependents()
+        {
+            return dependents;
         }
 
     }
