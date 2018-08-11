@@ -13,8 +13,24 @@ namespace BenefitsCalculation
         {
             foreach (EmployeeObject emp in EmployeeData.tracker.viewEmployees())
             {
-                td_EmployeeFirstName.InnerText = emp.getFirstName();
+                TableRow row = new TableRow();
+                TableCell idCell = new TableCell();
+                TableCell lastCell = new TableCell();
+                TableCell firstCell = new TableCell();
+                TableCell depNumCell = new TableCell();
+                TableCell costPerYearCell = new TableCell();
+                TableCell paycheckDeductionCell = new TableCell();
 
+                idCell.Text = emp.getID();
+                lastCell.Text = emp.getLastName();
+                firstCell.Text = emp.getFirstName();
+                depNumCell.Text = emp.getDependentsCount().ToString();
+                costPerYearCell.Text = emp.getCost();
+                paycheckDeductionCell.Text = "$0";
+                row.Cells.Add(idCell);
+
+                Table_EmployeeView.Rows.Add(row);
+                
             }
 
         }

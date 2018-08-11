@@ -7,11 +7,12 @@ namespace BenefitsCalculation
 {
     public class EmployeeObject
     {
-        private static string firstName;
-        private static string lastName;
-        private static string employeeID;
-        private static bool hasDependent;
-        private static List<DependentObject> dependents;
+        private string firstName;
+        private string lastName;
+        private string employeeID;
+        private bool hasDependent;
+        private List<DependentObject> dependents;
+        public int cost;
 
         public EmployeeObject(string fname, string lname, bool hasDeps)
         {
@@ -22,7 +23,8 @@ namespace BenefitsCalculation
             employeeID = idGenerator.Next(0, 999999).ToString("D5");
             hasDependent = hasDeps;
             hasDependent = false;
-            dependents = null;
+            dependents = new List<DependentObject>();
+            cost = 1000; // an employee by themselves costs $1000
         }
 
         public string getFullName()
@@ -45,14 +47,29 @@ namespace BenefitsCalculation
             return employeeID;
         }
 
-        public void employeeHasDependents()
+        public int getDependentsCount()
+        {
+            if (dependents.Equals(null))
+                return 0;
+
+            return dependents.Count;
+        }
+
+        public void addDependent(DependentObject dependent)
         {
             hasDependent = true;
+            dependents.Add(dependent);
+            cost += 500;
         }
 
         public List<DependentObject> getDependents()
         {
             return dependents;
+        }
+
+        public string getCost()
+        {
+            return cost.ToString("C2");
         }
     }
 }

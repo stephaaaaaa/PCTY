@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 
+
 <html lang="en">
 <head runat="server">
     <meta charset="utf-8" />
@@ -12,7 +13,9 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+
+
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/pcty_favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="Content/font-awesome.css" rel="stylesheet" />
     <link href="Content/bootstrap.css" rel="stylesheet" />
@@ -49,13 +52,13 @@
                         <span class="icon-bar"></span>
                     </button>
                     <img src="Images/pcty_benefitscalculator_white.png" />
+
                     <%--<img src="Images/pcty_challengeLogo_webSize.png" />--%>
-                    
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/">Home</a></li>
-<%--                        <li><a runat="server" href="~/About">About</a></li>--%>
+                        <%--                        <li><a runat="server" href="~/About">About</a></li>--%>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>
                 </div>

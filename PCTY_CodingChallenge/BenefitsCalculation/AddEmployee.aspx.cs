@@ -13,7 +13,7 @@ namespace BenefitsCalculation
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void Button_AddDependent_Click(object sender, EventArgs e)
@@ -26,28 +26,42 @@ namespace BenefitsCalculation
         protected void Button_GenerateDependentFields_Click(object sender, EventArgs e)
         {
             numberOfDependents = int.Parse(TextBoxNumberOfDependents.Text);
+            RequiredFieldValidator namesFieldValidtor = new RequiredFieldValidator();
+            namesFieldValidtor.ErrorMessage = "Please enter a name.";
+            namesFieldValidtor.ForeColor.Equals("#db1a32");
 
             Label[] fName_labels = new Label[numberOfDependents];
+
             TextBox[] fName_TextBoxes = new TextBox[numberOfDependents];
 
             Label[] lName_labels = new Label[numberOfDependents];
             TextBox[] lName_TextBoxes = new TextBox[numberOfDependents];
 
+            RegularExpressionValidator namesRegExValidator = new RegularExpressionValidator();
+            namesRegExValidator.ErrorMessage = "Do not include symbols other than numerals, punctuation marks, or letters.";
+            namesRegExValidator.ForeColor.Equals("#db1a32");
+            namesRegExValidator.ValidationExpression = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$";
+
             for (int i = 0; i < numberOfDependents; i++)
             {
                 fName_labels[i] = new Label();
                 fName_labels[i].CssClass = "col-lg-2";
-                fName_labels[i].Text = $"Dependent {i+1} first name";
+                fName_labels[i].Text = $"Dependent {i + 1} first name";
 
                 fName_TextBoxes[i] = new TextBox();
                 fName_TextBoxes[i].CssClass = "form-control";
+                namesFieldValidtor.ControlToValidate = fName_TextBoxes[i].Text;
+                namesRegExValidator.ControlToValidate = fName_TextBoxes[i].Text;
 
                 lName_labels[i] = new Label();
                 lName_labels[i].CssClass = "col-lg-2";
-                lName_labels[i].Text = $"Dependent {i+1} last name";
-                
+                lName_labels[i].Text = $"Dependent {i + 1} last name";
+
+
                 lName_TextBoxes[i] = new TextBox();
                 lName_TextBoxes[i].CssClass = "form-control";
+                //namesFieldValidtor.ControlToValidate = lName_TextBoxes[i].Text;
+                //namesRegExValidator.ControlToValidate = lName_TextBoxes[i].Text;
 
             }
 
@@ -63,6 +77,14 @@ namespace BenefitsCalculation
                 Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
                 Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
             }
+            Button submitEmployeeAndDependents = new Button();
+            submitEmployeeAndDependents.ID = "Button_SubmitEmployeeAndDependents";
+            submitEmployeeAndDependents.CssClass = "btn";
+            submitEmployeeAndDependents.Text = "Submit";
+            //The shit below don't work
+            //submitEmployeeAndDependents.Click += new EventHandler(this.Button_SubmitEmployeeAndDependents); ;
+
+            Panel_DependentsFields.Controls.Add(submitEmployeeAndDependents);
             Panel_DependentsFields.Visible = true;
         }
 
