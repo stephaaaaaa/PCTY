@@ -142,7 +142,7 @@ namespace BenefitsCalculation
 
             }
             PeopleData.tracker.addEmployee(newEmployee);
-
+            Response.Redirect("~/ViewEmployees.aspx");
         }
     }
 }
