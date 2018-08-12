@@ -3,7 +3,7 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron custom-jumbo">
-        <h1 style="font-family:;">Employee Benefits Calculator</h1>
+        <h1>Employee Benefits Calculator</h1>
         <p class="lead">
             Welcome to your employee benefits calculator. From this landing page, you can view, add,
             modify, or remove employees whose benefits packages you are keeping track of.
@@ -31,7 +31,7 @@
         </div>
 
         <div class="col-md-4">
-            <h2>View Employees</h2>
+            <h2>View employees</h2>
             <p>
                 Get an birds-eye view of who you're keeping track of. Any modifications that come to mind, can
                 also be taken care of from here.

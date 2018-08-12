@@ -37,5 +37,15 @@ tr:hover {
 }
 
 .jumbotron.custom-jumbo {
-    background-image: url('../Images/orange-gradient-linear-white-1920x1080-c2-ff8c00-ffffff-a-315-f-14.png');
+    background-image: url('../Images/orange-gradient.png');
+    font-family: roboto-slab-v7-latin-regular;
+}
+
+@font-face {
+    font-family: 'roboto-slab-v7-latin-regular';
+    src: url('roboto-slab-v7-latin-regular.woff') format('woff');
+}
+
+.navbar.navbar-inverse.navbar-fixed-top.custom-pcty-navbar {
+    color: #939399;
 }
