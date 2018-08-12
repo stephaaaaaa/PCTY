@@ -34,6 +34,25 @@ namespace BenefitsCalculation
             bojackH.changeID(generator.Next(0, 999999));
             employees.Add(bojackH);
 
+            EmployeeObject bobBelcher = new EmployeeObject("Bob", "Belcher", true);
+            bobBelcher.addDependent(new DependentObject("Linda", "Belcher", bobBelcher.getFullName()));
+            bobBelcher.addDependent(new DependentObject("Tina", "Belcher", bobBelcher.getFullName()));
+            bobBelcher.addDependent(new DependentObject("Gene", "Belcher", bobBelcher.getFullName()));
+            bobBelcher.addDependent(new DependentObject("Louise", "Belcher", bobBelcher.getFullName()));
+            bobBelcher.changeID(generator.Next(0, 999999));
+            employees.Add(bobBelcher);
+
+            EmployeeObject dianaPrince = new EmployeeObject("Diana", "Prince", false);
+            dianaPrince.changeID(generator.Next(0, 999999));
+            employees.Add(dianaPrince);
+
+            EmployeeObject mikasaAckerman = new EmployeeObject("Mikasa", "Ackerman", false);
+            mikasaAckerman.changeID(generator.Next(0, 999999));
+            employees.Add(mikasaAckerman);
+
+            EmployeeObject karaDanvers = new EmployeeObject("Kara", "Danvers", false);
+            karaDanvers.changeID(generator.Next(0, 999999));
+            employees.Add(karaDanvers);
         }
 
         public void addEmployee(EmployeeObject newEmployee)
