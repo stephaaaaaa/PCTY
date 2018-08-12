@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
+    <div class="jumbotron custom-jumbo">
         <h1 style="font-family:;">Employee Benefits Calculator</h1>
         <p class="lead">
             Welcome to your employee benefits calculator. From this landing page, you can view, add,

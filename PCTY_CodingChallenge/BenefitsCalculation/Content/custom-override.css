@@ -33,5 +33,9 @@ tr:hover {
 }
 
 .container.body-content.padding-custom {
-    padding-top: 60px ;
+    padding-top: 60px;
+}
+
+.jumbotron.custom-jumbo {
+    background-image: url('../Images/orange-gradient-linear-white-1920x1080-c2-ff8c00-ffffff-a-315-f-14.png');
 }
