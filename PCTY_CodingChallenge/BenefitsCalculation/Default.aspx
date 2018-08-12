@@ -49,9 +49,9 @@
         <div class="col-md-4">
             <h2>Modify an employee's information</h2>
             <p>
-                Have someone in mind? Search your employee via their first or last name, or their employee ID. From
+                Have someone in mind? Search your employee via their first or last name. From
                 there, you'll see information regarding their benefits cost. You can add or remove dependents for them,
-                or remove the employee.
+                or remove the employee from your records.
             </p>
             <p>
                 <asp:LinkButton

@@ -35,6 +35,7 @@ namespace BenefitsCalculation
                 Button Button_ViewDetails = new Button();
                 Button_ViewDetails.Text = "View Details";
                 Button_ViewDetails.CssClass = "btn";
+                Button_ViewDetails.Click += new EventHandler(Button_ViewDetails_Click);
                 buttonCell.Controls.Add(Button_ViewDetails);
 
                 TableRow row = new TableRow();
@@ -51,6 +52,11 @@ namespace BenefitsCalculation
                 Table_EmployeeView.Rows.Add(row);
                 numberOfDataPopulatedRows++;
             }
+        }
+
+        private void Button_ViewDetails_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CloserDetails");
         }
     }
 }

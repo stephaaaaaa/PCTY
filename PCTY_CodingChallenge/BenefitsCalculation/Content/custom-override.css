@@ -21,3 +21,17 @@ tr:hover {
     border-style: ridge;
     border-color: #E6BD91;
 }
+
+.navbar-inverse {
+    background-color: #FFFFFF !important;
+    border: none;
+}
+
+.navbar-custom {
+    background-image: none;
+    color: #000000;
+}
+
+.container.body-content.padding-custom {
+    padding-top: 60px ;
+}
