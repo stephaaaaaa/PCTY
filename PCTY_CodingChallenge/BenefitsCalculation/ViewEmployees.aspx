@@ -17,7 +17,7 @@
                 <asp:TableHeaderCell ID="HeaderCell_CostPerYear" runat="server" Text="Benefits cost per year" />
                 <asp:TableHeaderCell ID="HeaderCell_PaycheckDeduction" runat="server" Text="Deduction per paycheck" />
                 <asp:TableHeaderCell ID="HeaderCell_PaycheckRemaining" runat="server" Text="Paycheck after deductions" />
-                <asp:TableHeaderCell runat="server" /> <%--For the button, hopefully--%>
+                <asp:TableHeaderCell runat="server" />
 
             </asp:TableHeaderRow>
             <asp:TableRow TableSection="TableBody" ID="EmployeeViewBody">

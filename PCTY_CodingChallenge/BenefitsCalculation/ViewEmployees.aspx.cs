@@ -13,7 +13,7 @@ namespace BenefitsCalculation
         {
             int numberOfDataPopulatedRows = 0;
 
-            foreach (EmployeeObject emp in PeopleData.tracker.viewEmployees())
+            foreach (EmployeeObject emp in BackendData.tracker.viewEmployees())
             {
                 TableCell idCell = new TableCell();
                 TableCell lastCell = new TableCell();

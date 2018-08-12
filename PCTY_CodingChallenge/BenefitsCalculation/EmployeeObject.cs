@@ -14,7 +14,6 @@ namespace BenefitsCalculation
         private List<DependentObject> dependents;
         private int dependentCount;
         private int cost;
-        private int deductionsPerPaycheck;
 
         public EmployeeObject(string fname, string lname, bool hasDeps)
         {

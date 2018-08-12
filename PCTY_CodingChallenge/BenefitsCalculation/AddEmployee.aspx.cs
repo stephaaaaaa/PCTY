@@ -12,10 +12,11 @@ namespace BenefitsCalculation
         //private int numberOfDependents;
         private TextBox[] fName_TextBoxes;
         private TextBox[] lName_TextBoxes;
+        private Random generator;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            generator = new Random();
         }
 
         protected void Button_AddDependent_Click(object sender, EventArgs e)
@@ -89,7 +90,8 @@ namespace BenefitsCalculation
             string lname = TextBox_EmployeeLastName.Text;
 
             EmployeeObject newEmployee = new EmployeeObject(fname, lname, false);
-            PeopleData.tracker.addEmployee(newEmployee);
+            newEmployee.changeID(generator.Next(0, 999999));
+            BackendData.tracker.addEmployee(newEmployee);
             Response.Redirect("~/ViewEmployees.aspx");
         }
 
@@ -99,6 +101,7 @@ namespace BenefitsCalculation
             string employee_lname = TextBox_EmployeeLastName.Text;
 
             EmployeeObject newEmployee = new EmployeeObject(employee_fname, employee_lname, true);
+            newEmployee.changeID(generator.Next(0, 999999));
 
             string dep_firstName = "";
             string dep_lastName = "";
@@ -132,7 +135,7 @@ namespace BenefitsCalculation
                     newEmployee.addDependent(newDependent);
                 }
             }
-            PeopleData.tracker.addEmployee(newEmployee);
+            BackendData.tracker.addEmployee(newEmployee);
             Response.Redirect("~/ViewEmployees.aspx");
         }
 
@@ -158,7 +161,8 @@ namespace BenefitsCalculation
             string lname = TextBox_EmployeeLastName.Text;
 
             EmployeeObject newEmployee = new EmployeeObject(fname, lname, false);
-            PeopleData.tracker.addEmployee(newEmployee);
+            newEmployee.changeID(generator.Next(0, 999999));
+            BackendData.tracker.addEmployee(newEmployee);
             Response.Redirect("~/ViewEmployees.aspx");
         }
     }

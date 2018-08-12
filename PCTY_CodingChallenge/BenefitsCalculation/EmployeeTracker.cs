@@ -6,31 +6,32 @@ using System.Web;
 namespace BenefitsCalculation
 {
 
-    public class PeopleTracker
+    public class EmployeeTracker
     {
         private List<EmployeeObject> employees;
-        private List<int> employeeIDValues;
 
-        public PeopleTracker()
+        public EmployeeTracker()
         {
             employees = new List<EmployeeObject>();
-            employeeIDValues = new List<int>();
             initializeTestEmployees();
         }
 
         private void initializeTestEmployees()
         {
             Random generator = new Random();
-            int preAssignedID = generator.Next();
-            employeeIDValues.Add(preAssignedID);
 
             EmployeeObject charlieKelly = new EmployeeObject("Charlie", "Kelly", false);
+            charlieKelly.changeID(generator.Next(0, 999999));
             employees.Add(charlieKelly);
+
             EmployeeObject frankReynolds = new EmployeeObject("Frank", "Reynolds", true);
+            frankReynolds.changeID(generator.Next(0, 999999));
             frankReynolds.addDependent(new DependentObject("Deandra", "Reynolds", frankReynolds.getFullName()));
             frankReynolds.addDependent(new DependentObject("Dennis", "Reynolds", frankReynolds.getFullName()));
             employees.Add(frankReynolds);
+
             EmployeeObject bojackH = new EmployeeObject("Bojack", "Horseman", false);
+            bojackH.changeID(generator.Next(0, 999999));
             employees.Add(bojackH);
 
         }
