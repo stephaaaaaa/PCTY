@@ -21,6 +21,7 @@ namespace BenefitsCalculation
                 TableCell depNumCell = new TableCell();
                 TableCell costPerYearCell = new TableCell();
                 TableCell paycheckDeductionCell = new TableCell();
+                TableCell amountPerPaycheckCell = new TableCell();
                 TableCell buttonCell = new TableCell();
 
                 idCell.Text = emp.getID();
@@ -28,7 +29,8 @@ namespace BenefitsCalculation
                 firstCell.Text = emp.getFirstName();
                 depNumCell.Text = emp.getDependentsCount().ToString();
                 costPerYearCell.Text = emp.getCost();
-                paycheckDeductionCell.Text = "$0";
+                amountPerPaycheckCell.Text = emp.getPaycheckAfterDeductions();
+                paycheckDeductionCell.Text = emp.getDeductionsPerPaycheck();
 
                 Button Button_ViewDetails = new Button();
                 Button_ViewDetails.Text = "View Details";
@@ -43,6 +45,7 @@ namespace BenefitsCalculation
                 row.Cells.Add(depNumCell);
                 row.Cells.Add(costPerYearCell);
                 row.Cells.Add(paycheckDeductionCell);
+                row.Cells.Add(amountPerPaycheckCell);
                 row.Cells.Add(buttonCell);
 
                 Table_EmployeeView.Rows.Add(row);

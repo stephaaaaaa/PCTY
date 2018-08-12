@@ -131,7 +131,6 @@ namespace BenefitsCalculation
                     DependentObject newDependent = new DependentObject(dep_firstName, dep_lastName, newEmployee.getFullName());
                     newEmployee.addDependent(newDependent);
                 }
-
             }
             PeopleData.tracker.addEmployee(newEmployee);
             Response.Redirect("~/ViewEmployees.aspx");

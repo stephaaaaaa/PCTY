@@ -14,6 +14,7 @@ namespace BenefitsCalculation
         private List<DependentObject> dependents;
         private int dependentCount;
         private int cost;
+        private int deductionsPerPaycheck;
 
         public EmployeeObject(string fname, string lname, bool hasDeps)
         {
@@ -52,11 +53,6 @@ namespace BenefitsCalculation
             employeeID = newID.ToString("D5");
         }
 
-        //public void setNumberOfDependents(int count)
-        //{
-        //    dependentCount = count;
-        //}
-
         public int getDependentsCount()
         {
             return dependentCount;
@@ -77,6 +73,28 @@ namespace BenefitsCalculation
         public string getCost()
         {
             return cost.ToString("C2");
+        }
+
+        public string getDeductionsPerPaycheck()
+        {
+            int totalPaycheckAmount = 2000;
+            int paychecksPerYear = 26;
+
+            int amountToDeduct = cost / paychecksPerYear;
+            int amountRemaining = totalPaycheckAmount - amountToDeduct;
+
+            return amountToDeduct.ToString("C2");
+        }
+
+        public string getPaycheckAfterDeductions()
+        {
+            int totalPaycheckAmount = 2000;
+            int paychecksPerYear = 26;
+
+            int amountToDeduct = cost / paychecksPerYear;
+            int amountRemaining = totalPaycheckAmount - amountToDeduct;
+
+            return amountRemaining.ToString("C2");
         }
     }
 }
