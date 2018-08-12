@@ -57,12 +57,12 @@
                 Text="Add Dependents" />
             <asp:Button
                 runat="server"
-                ID="Button_EditEmployeeName"
+                ID="Button_ContinueAddingDependents"
                 CssClass="btn"
-                OnClick="Button_EditEmployeeName_Click"
+                OnClick="Button_ContinueAddingDependents_Click"
+                Visible="false"
                 CausesValidation="false"
-                Text="Edit Employee Name"
-                Visible="false" />
+                Text="Continue adding dependents" />
             <asp:Button
                 runat="server"
                 ID="Button_SubmitEmployeeWithNoDependents"
@@ -70,10 +70,9 @@
                 OnClick="Button_SubmitEmployeeWithNoDependents_Click"
                 Text="Submit" />
         </div>
-        <br />
-        <br />
-        <br />
     </asp:Panel>
+    <br />
+    <br />
 
     <asp:Panel runat="server" ID="Panel_AddDependents" Visible="false">
         <div class="row col-lg-9">
@@ -87,15 +86,28 @@
                 ID="TextBoxNumberOfDependents"
                 CssClass="form-control">
             </asp:TextBox>
+            <asp:RegularExpressionValidator
+                runat="server"
+                ControlToValidate="TextBoxNumberOfDependents"
+                ValidationExpression="^[1-9]\d*$"
+                ErrorMessage="*Number of dependents must be a whole number greater than 0."
+                ForeColor="#db1a32">
+            </asp:RegularExpressionValidator>
         </div>
         <br />
         <br />
-        <div >
+        <br />
+        <div>
             <asp:Button runat="server"
                 ID="Button_GenerateDependentFields"
                 CssClass=" btn"
                 OnClick="Button_GenerateDependentFields_Click"
                 Text="Generate dependent fields"></asp:Button>
+            <asp:Button runat="server"
+                ID="Button_CancelAddingDependents"
+                CssClass=" btn"
+                OnClick="Button_CancelAddingDependents_Click"
+                Text="Submit without dependents"></asp:Button>
         </div>
         <br />
 
@@ -106,20 +118,10 @@
                 ErrorMessage="*Please enter a number of dependents."
                 ForeColor="#db1a32">
             </asp:RequiredFieldValidator>
-            <asp:RegularExpressionValidator
-                runat="server"
-                ControlToValidate="TextBoxNumberOfDependents"
-                ValidationExpression="^\d+$"
-                ErrorMessage="*Number of dependents must be a whole number"
-                ForeColor="#db1a32">
-            </asp:RegularExpressionValidator>
+
         </div>
     </asp:Panel>
 
-    <br />
-    <br />
-    <br />
-    <br />
 
     <div class="row col-lg-12">
         <asp:Panel runat="server" ID="Panel_DependentsFields" Visible="false">

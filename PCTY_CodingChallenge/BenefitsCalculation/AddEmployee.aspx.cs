@@ -23,10 +23,7 @@ namespace BenefitsCalculation
             Button_SubmitEmployeeWithNoDependents.Visible = false;
             Button_AddDependent.Visible = false;
 
-            TextBox_EmployeeFirstName.ReadOnly = true;
-            TextBox_EmployeeLastName.ReadOnly = true;
             Panel_AddDependents.Visible = true;
-            Button_EditEmployeeName.Visible = true;
         }
 
         protected void Button_GenerateDependentFields_Click(object sender, EventArgs e)
@@ -152,11 +149,28 @@ namespace BenefitsCalculation
 
         protected void Button_EditEmployeeName_Click(object sender, EventArgs e)
         {
-            TextBox_EmployeeFirstName.ReadOnly = false;
-            TextBox_EmployeeLastName.ReadOnly = false;
-            Panel_AddDependents.Visible = false;
+            Button_ContinueAddingDependents.Visible = true;
+            Button_GenerateDependentFields.Visible = false;
+            Panel_AddDependents.Visible = true;
             Panel_DependentsFields.Visible = false;
             Panel_SubmitWithDependents.Visible = false;
+        }
+
+        protected void Button_ContinueAddingDependents_Click(object sender, EventArgs e)
+        {
+            Button_ContinueAddingDependents.Visible = false;
+            TextBoxNumberOfDependents.ReadOnly = false;
+            Button_GenerateDependentFields.Visible = true;
+        }
+
+        protected void Button_CancelAddingDependents_Click(object sender, EventArgs e)
+        {
+            string fname = TextBox_EmployeeFirstName.Text;
+            string lname = TextBox_EmployeeLastName.Text;
+
+            EmployeeObject newEmployee = new EmployeeObject(fname, lname, false);
+            PeopleData.tracker.addEmployee(newEmployee);
+            Response.Redirect("~/ViewEmployees.aspx");
         }
     }
 }
