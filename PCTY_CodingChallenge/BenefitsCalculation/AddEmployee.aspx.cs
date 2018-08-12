@@ -99,11 +99,10 @@ namespace BenefitsCalculation
             string employee_lname = TextBox_EmployeeLastName.Text;
 
             EmployeeObject newEmployee = new EmployeeObject(employee_fname, employee_lname, true);
-            newEmployee.setNumberOfDependents(int.Parse(TextBoxNumberOfDependents.Text));
 
             string dep_firstName = "";
             string dep_lastName = "";
-            for (int i = 0; i < Request.Form.Count - newEmployee.getDependentsCount(); i++)
+            for (int i = 0; i < Request.Form.Count; i++)
             {
                 if (Request.Form.AllKeys[i].Contains("dep_FirstName")) // indicates that the text boxes exist
                 {
