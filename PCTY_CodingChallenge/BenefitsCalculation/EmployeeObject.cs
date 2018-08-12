@@ -67,6 +67,7 @@ namespace BenefitsCalculation
         {
             cost += 500;
             dependents.Add(dependent);
+            dependentCount++;
         }
 
         public List<DependentObject> getDependents()

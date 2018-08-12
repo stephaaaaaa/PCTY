@@ -11,6 +11,8 @@ namespace BenefitsCalculation
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            int numberOfDataPopulatedRows = 0;
+
             foreach (EmployeeObject emp in PeopleData.tracker.viewEmployees())
             {
                 TableCell idCell = new TableCell();
@@ -19,6 +21,7 @@ namespace BenefitsCalculation
                 TableCell depNumCell = new TableCell();
                 TableCell costPerYearCell = new TableCell();
                 TableCell paycheckDeductionCell = new TableCell();
+                TableCell buttonCell = new TableCell();
 
                 idCell.Text = emp.getID();
                 lastCell.Text = emp.getLastName();
@@ -27,17 +30,24 @@ namespace BenefitsCalculation
                 costPerYearCell.Text = emp.getCost();
                 paycheckDeductionCell.Text = "$0";
 
+                Button Button_ViewDetails = new Button();
+                Button_ViewDetails.Text = "View Details";
+                Button_ViewDetails.CssClass = "btn";
+                buttonCell.Controls.Add(Button_ViewDetails);
+
                 TableRow row = new TableRow();
+
                 row.Cells.Add(idCell);
                 row.Cells.Add(lastCell);
                 row.Cells.Add(firstCell);
                 row.Cells.Add(depNumCell);
                 row.Cells.Add(costPerYearCell);
                 row.Cells.Add(paycheckDeductionCell);
+                row.Cells.Add(buttonCell);
 
                 Table_EmployeeView.Rows.Add(row);
+                numberOfDataPopulatedRows++;
             }
-
         }
     }
 }

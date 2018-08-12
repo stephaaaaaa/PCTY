@@ -26,7 +26,9 @@ namespace BenefitsCalculation
 
             EmployeeObject charlieKelly = new EmployeeObject("Charlie", "Kelly", false);
             employees.Add(charlieKelly);
-            EmployeeObject frankReynolds = new EmployeeObject("Frank", "Reynolds", false);
+            EmployeeObject frankReynolds = new EmployeeObject("Frank", "Reynolds", true);
+            frankReynolds.addDependent(new DependentObject("Deandra", "Reynolds", frankReynolds.getFullName()));
+            frankReynolds.addDependent(new DependentObject("Dennis", "Reynolds", frankReynolds.getFullName()));
             employees.Add(frankReynolds);
             EmployeeObject bojackH = new EmployeeObject("Bojack", "Horseman", false);
             employees.Add(bojackH);

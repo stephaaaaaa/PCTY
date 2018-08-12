@@ -16,17 +16,11 @@
                 <asp:TableHeaderCell ID="HeaderCell_DepNum" runat="server" Text="Number of Dependents" />
                 <asp:TableHeaderCell ID="HeaderCell_CostPerYear" runat="server" Text="Benefits cost per year" />
                 <asp:TableHeaderCell ID="HeaderCell_PaycheckDeduction" runat="server" Text="Deduction per paycheck" />
-                <asp:TableHeaderCell runat="server" />
+                <asp:TableHeaderCell runat="server" /> <%--For the button, hopefully--%>
 
             </asp:TableHeaderRow>
             <asp:TableRow TableSection="TableBody" ID="EmployeeViewBody">
-                <asp:TableCell runat="server" ID="Cell_ID" />
-                <asp:TableCell runat="server" ID="Cell_Last" />
-                <asp:TableCell runat="server" ID="Cell_First" />
-                <asp:TableCell runat="server" ID="Cell_DepNum" />
-                <asp:TableCell runat="server" ID="Cell_CostPerYear" />
-                <asp:TableCell runat="server" ID="Cell_PaycheckDeduction" />
-                <asp:TableCell runat="server" ID="Btn" CssClass="btn" />
+
             </asp:TableRow>
         </asp:Table>
     </asp:Panel>
