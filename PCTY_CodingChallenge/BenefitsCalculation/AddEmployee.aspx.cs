@@ -9,7 +9,7 @@ namespace BenefitsCalculation
 {
     public partial class AddEmployee : System.Web.UI.Page
     {
-        private int numberOfDependents;
+        //private int numberOfDependents;
         private TextBox[] fName_TextBoxes;
         private TextBox[] lName_TextBoxes;
 
@@ -28,7 +28,7 @@ namespace BenefitsCalculation
 
         protected void Button_GenerateDependentFields_Click(object sender, EventArgs e)
         {
-            numberOfDependents = int.Parse(TextBoxNumberOfDependents.Text);
+            int numberOfDependents = int.Parse(TextBoxNumberOfDependents.Text);
             RequiredFieldValidator namesFieldValidtor = new RequiredFieldValidator();
             namesFieldValidtor.ErrorMessage = "Please enter a name.";
             namesFieldValidtor.ForeColor.Equals("#db1a32");
@@ -54,8 +54,6 @@ namespace BenefitsCalculation
                 fName_TextBoxes[i].EnableViewState = true;
                 fName_TextBoxes[i].CssClass = "form-control";
                 fName_TextBoxes[i].ID = $"dep_FirstName{i}";
-                //namesFieldValidtor.ControlToValidate = fName_TextBoxes[i].Text;
-                //namesRegExValidator.ControlToValidate = fName_TextBoxes[i].Text;
 
                 lName_labels[i] = new Label();
                 lName_labels[i].CssClass = "row col-lg-2";
@@ -66,9 +64,6 @@ namespace BenefitsCalculation
                 lName_TextBoxes[i].EnableViewState = true;
                 lName_TextBoxes[i].CssClass = "form-control";
                 lName_TextBoxes[i].ID = $"dep_LastName{i}";
-                //namesFieldValidtor.ControlToValidate = lName_TextBoxes[i].Text;
-                //namesRegExValidator.ControlToValidate = lName_TextBoxes[i].Text;
-
             }
 
             for (int i = 0; i < numberOfDependents; i++)
@@ -82,9 +77,6 @@ namespace BenefitsCalculation
                 Panel_DependentsFields.Controls.Add(lName_TextBoxes[i]); // last name text box
                 Panel_DependentsFields.Attributes.Add("class", "row");
                 Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
-                DependentObject newDependent = new DependentObject($"{fName_TextBoxes[i].Text}", $"{lName_TextBoxes[i].Text}",
-                    $"{TextBox_EmployeeFirstName.Text} {TextBox_EmployeeLastName.Text}");
-                PeopleData.tracker.addDependent(newDependent);
             }
             Panel_DependentsFields.CssClass = "row";
             Panel_DependentsFields.Visible = true;
@@ -115,7 +107,6 @@ namespace BenefitsCalculation
             {
                 if (Request.Form.AllKeys[i].Contains("dep_FirstName")) // indicates that the text boxes exist
                 {
-
                     int ParamStartPoint = Request.Form.AllKeys[i].IndexOf("dep_First");
                     int ParamNameLength = Request.Form.AllKeys[i].Length - ParamStartPoint - 1;
 

@@ -8,18 +8,22 @@ namespace BenefitsCalculation
 
     public class PeopleTracker
     {
-        private static List<EmployeeObject> employees;
-        private static List<DependentObject> dependents;
+        private List<EmployeeObject> employees;
+        private List<int> employeeIDValues;
 
         public PeopleTracker()
         {
             employees = new List<EmployeeObject>();
-            dependents = new List<DependentObject>();
+            employeeIDValues = new List<int>();
             initializeTestEmployees();
         }
 
         private void initializeTestEmployees()
         {
+            Random generator = new Random();
+            int preAssignedID = generator.Next();
+            employeeIDValues.Add(preAssignedID);
+
             EmployeeObject charlieKelly = new EmployeeObject("Charlie", "Kelly", false);
             employees.Add(charlieKelly);
             EmployeeObject frankReynolds = new EmployeeObject("Frank", "Reynolds", false);
@@ -34,11 +38,6 @@ namespace BenefitsCalculation
             employees.Add(newEmployee);
         }
 
-        public void addDependent(DependentObject newDependent)
-        {
-            dependents.Add(newDependent);
-        }
-
         public void removeEmployee(EmployeeObject employeeToRemove)
         {
             foreach (EmployeeObject employee in employees)
@@ -51,27 +50,11 @@ namespace BenefitsCalculation
             }
         }
 
-        public void removeDependent(DependentObject dependentToRemove)
-        {
-            foreach (DependentObject dependent in dependents)
-            {
-                if (dependent.Equals(dependentToRemove))
-                {
-                    dependents.Remove(dependent);
-                }
-                //Add a catch for if the dependent doesn't exist
-            }
-        }
-
         public List<EmployeeObject> viewEmployees()
         {
             return employees;
         }
 
-        public List<DependentObject> viewDependents()
-        {
-            return dependents;
-        }
 
     }
 }

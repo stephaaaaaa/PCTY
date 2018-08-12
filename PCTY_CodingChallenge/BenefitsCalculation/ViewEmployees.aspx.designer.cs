@@ -85,6 +85,15 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.TableHeaderCell HeaderCell_PaycheckDeduction;
         
         /// <summary>
+        /// EmployeeViewBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TableRow EmployeeViewBody;
+        
+        /// <summary>
         /// Cell_ID control.
         /// </summary>
         /// <remarks>
@@ -139,57 +148,12 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.TableCell Cell_PaycheckDeduction;
         
         /// <summary>
-        /// Panel_EmployeesDisplay control.
+        /// Btn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel_EmployeesDisplay;
-        
-        /// <summary>
-        /// td_EmployeeID control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell td_EmployeeID;
-        
-        /// <summary>
-        /// td_EmployeeLastName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell td_EmployeeLastName;
-        
-        /// <summary>
-        /// td_EmployeeFirstName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell td_EmployeeFirstName;
-        
-        /// <summary>
-        /// td_HasDeps control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell td_HasDeps;
-        
-        /// <summary>
-        /// td_BenefitsCost control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlTableCell td_BenefitsCost;
+        protected global::System.Web.UI.WebControls.TableCell Btn;
     }
 }

@@ -21,11 +21,11 @@ namespace BenefitsCalculation
 
             firstName = fname;
             lastName = lname;
-            employeeID = idGenerator.Next(0, 999999).ToString("D5");
             hasDependent = hasDeps;
             dependents = new List<DependentObject>();
             dependentCount = 0;
             cost = 1000; // an employee by themselves costs $1000
+            employeeID = 0.ToString("D5");
         }
 
         public string getFullName()
@@ -48,6 +48,11 @@ namespace BenefitsCalculation
             return employeeID;
         }
 
+        public void changeID(int newID)
+        {
+            employeeID = newID.ToString("D5");
+        }
+
         public void setNumberOfDependents(int count)
         {
             dependentCount = count;
@@ -60,8 +65,8 @@ namespace BenefitsCalculation
 
         public void addDependent(DependentObject dependent)
         {
-            dependents.Add(dependent);
             cost += 500;
+            dependents.Add(dependent);
         }
 
         public List<DependentObject> getDependents()

@@ -13,7 +13,6 @@ namespace BenefitsCalculation
         {
             foreach (EmployeeObject emp in PeopleData.tracker.viewEmployees())
             {
-                TableRow row = new TableRow();
                 TableCell idCell = new TableCell();
                 TableCell lastCell = new TableCell();
                 TableCell firstCell = new TableCell();
@@ -27,10 +26,16 @@ namespace BenefitsCalculation
                 depNumCell.Text = emp.getDependentsCount().ToString();
                 costPerYearCell.Text = emp.getCost();
                 paycheckDeductionCell.Text = "$0";
+
+                TableRow row = new TableRow();
                 row.Cells.Add(idCell);
+                row.Cells.Add(lastCell);
+                row.Cells.Add(firstCell);
+                row.Cells.Add(depNumCell);
+                row.Cells.Add(costPerYearCell);
+                row.Cells.Add(paycheckDeductionCell);
 
                 Table_EmployeeView.Rows.Add(row);
-                
             }
 
         }
