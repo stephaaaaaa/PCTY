@@ -49,6 +49,15 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.Button Button_AddDependent;
         
         /// <summary>
+        /// Button_EditEmployeeName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_EditEmployeeName;
+        
+        /// <summary>
         /// Button_SubmitEmployeeWithNoDependents control.
         /// </summary>
         /// <remarks>
@@ -82,7 +91,7 @@ namespace BenefitsCalculation {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton Button_GenerateDependentFields;
+        protected global::System.Web.UI.WebControls.Button Button_GenerateDependentFields;
         
         /// <summary>
         /// Panel_DependentsFields control.

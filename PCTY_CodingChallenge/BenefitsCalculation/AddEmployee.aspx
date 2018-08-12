@@ -57,58 +57,64 @@
                 Text="Add Dependents" />
             <asp:Button
                 runat="server"
+                ID="Button_EditEmployeeName"
+                CssClass="btn"
+                OnClick="Button_EditEmployeeName_Click"
+                CausesValidation="false"
+                Text="Edit Employee Name"
+                Visible="false" />
+            <asp:Button
+                runat="server"
                 ID="Button_SubmitEmployeeWithNoDependents"
-                CssClass="btn "
+                CssClass="btn"
                 OnClick="Button_SubmitEmployeeWithNoDependents_Click"
                 Text="Submit" />
         </div>
         <br />
         <br />
         <br />
-
     </asp:Panel>
 
-    <div class="row col-lg-12">
-        <asp:Panel runat="server" ID="Panel_AddDependents" Visible="false">
-            <div class="row">
-                <asp:Label
-                    runat="server"
-                    CssClass="col-lg-2">
-                Number of dependents
-                </asp:Label>
-                <div class="col-sm-2">
-                    <asp:TextBox
-                        runat="server"
-                        ID="TextBoxNumberOfDependents"
-                        CssClass="form-control">
-                    </asp:TextBox>
-                </div>
-                <asp:LinkButton runat="server"
-                    ID="Button_GenerateDependentFields"
-                    CssClass="btn btn-default"
-                    OnClick="Button_GenerateDependentFields_Click">
-                    Generate dependent fields
-                </asp:LinkButton>
-            </div>
-            <br />
+    <asp:Panel runat="server" ID="Panel_AddDependents" Visible="false">
+        <div class="row col-lg-9">
+            <asp:Label
+                runat="server"
+                CssClass="row col-lg-3"
+                Text="Number of Dependents">
+            </asp:Label>
+            <asp:TextBox
+                runat="server"
+                ID="TextBoxNumberOfDependents"
+                CssClass="form-control">
+            </asp:TextBox>
+        </div>
+        <br />
+        <br />
+        <div >
+            <asp:Button runat="server"
+                ID="Button_GenerateDependentFields"
+                CssClass=" btn"
+                OnClick="Button_GenerateDependentFields_Click"
+                Text="Generate dependent fields"></asp:Button>
+        </div>
+        <br />
 
-            <div class="row">
-                <asp:RequiredFieldValidator
-                    runat="server"
-                    ControlToValidate="TextBoxNumberOfDependents"
-                    ErrorMessage="*Please enter a number of dependents."
-                    ForeColor="#db1a32">
-                </asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator
-                    runat="server"
-                    ControlToValidate="TextBoxNumberOfDependents"
-                    ValidationExpression="^\d+$"
-                    ErrorMessage="*Number of dependents must be a whole number"
-                    ForeColor="#db1a32">
-                </asp:RegularExpressionValidator>
-            </div>
-        </asp:Panel>
-    </div>
+        <div class="row">
+            <asp:RequiredFieldValidator
+                runat="server"
+                ControlToValidate="TextBoxNumberOfDependents"
+                ErrorMessage="*Please enter a number of dependents."
+                ForeColor="#db1a32">
+            </asp:RequiredFieldValidator>
+            <asp:RegularExpressionValidator
+                runat="server"
+                ControlToValidate="TextBoxNumberOfDependents"
+                ValidationExpression="^\d+$"
+                ErrorMessage="*Number of dependents must be a whole number"
+                ForeColor="#db1a32">
+            </asp:RegularExpressionValidator>
+        </div>
+    </asp:Panel>
 
     <br />
     <br />
