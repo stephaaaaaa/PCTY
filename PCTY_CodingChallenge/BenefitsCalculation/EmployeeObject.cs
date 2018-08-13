@@ -19,8 +19,8 @@ namespace BenefitsCalculation
         {
             Random idGenerator = new Random();
 
-            firstName = fname;
-            lastName = lname;
+            firstName = uppercaseFirstLetter(fname);
+            lastName = uppercaseFirstLetter(lname);
             hasDependent = hasDeps;
             dependents = new List<DependentObject>();
             cost = 1000; // an employee by themselves costs $1000
@@ -33,7 +33,11 @@ namespace BenefitsCalculation
                 double discount = cost * .10;
                 cost -= discount;
             }
+        }
 
+        private string uppercaseFirstLetter(string name)
+        {
+            return $"{name.First().ToString().ToUpper()}{name.Substring(1).ToLower()}";
         }
 
         public string getFullName()

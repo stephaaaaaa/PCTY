@@ -13,9 +13,14 @@ namespace BenefitsCalculation
 
         public DependentObject(string fname, string lname, string parentOrSpouse)
         {
-            firstName = fname;
-            lastName = lname;
+            firstName = uppercaseFirstLetter(fname);
+            lastName = uppercaseFirstLetter(lname);
             respectiveDependent = parentOrSpouse;
+        }
+
+        private string uppercaseFirstLetter(string name)
+        {
+            return $"{name.First().ToString().ToUpper()}{name.Substring(1).ToLower()}";
         }
 
         public string getName()
