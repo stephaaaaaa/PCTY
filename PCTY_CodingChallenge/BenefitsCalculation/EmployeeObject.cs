@@ -13,7 +13,7 @@ namespace BenefitsCalculation
         private bool hasDependent;
         private List<DependentObject> dependents;
         private int dependentCount;
-        private int cost;
+        private double cost;
 
         public EmployeeObject(string fname, string lname, bool hasDeps)
         {
@@ -25,6 +25,15 @@ namespace BenefitsCalculation
             dependents = new List<DependentObject>();
             cost = 1000; // an employee by themselves costs $1000
             employeeID = 0.ToString("D5");
+
+            string lower = firstName.ToLower();
+            char first = lower.First();
+            if (firstName.ToLower().First().Equals('a')) // their name starts with A
+            {
+                double discount = cost * .10;
+                cost -= discount;
+            }
+
         }
 
         public string getFullName()
@@ -59,7 +68,14 @@ namespace BenefitsCalculation
 
         public void addDependent(DependentObject dependent)
         {
-            cost += 500;
+            double dependentCost = 500;
+            if (dependent.getName().ToLower().First().Equals('a')) // if the dependent name starts with a
+            {
+                double discount = dependentCost * .10;
+                dependentCost -= discount;
+            }
+
+            cost += dependentCost;
             dependents.Add(dependent);
             dependentCount++;
         }
@@ -79,8 +95,8 @@ namespace BenefitsCalculation
             int totalPaycheckAmount = 2000;
             int paychecksPerYear = 26;
 
-            int amountToDeduct = cost / paychecksPerYear;
-            int amountRemaining = totalPaycheckAmount - amountToDeduct;
+            double amountToDeduct = cost / paychecksPerYear;
+            double amountRemaining = totalPaycheckAmount - amountToDeduct;
 
             return amountToDeduct.ToString("C2");
         }
@@ -90,8 +106,8 @@ namespace BenefitsCalculation
             int totalPaycheckAmount = 2000;
             int paychecksPerYear = 26;
 
-            int amountToDeduct = cost / paychecksPerYear;
-            int amountRemaining = totalPaycheckAmount - amountToDeduct;
+            double amountToDeduct = cost / paychecksPerYear;
+            double amountRemaining = totalPaycheckAmount - amountToDeduct;
 
             return amountRemaining.ToString("C2");
         }

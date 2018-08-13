@@ -13,5 +13,10 @@ namespace BenefitsCalculation
         {
 
         }
+
+        protected void Button_SubmitSearch_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
