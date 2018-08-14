@@ -106,7 +106,7 @@
             <asp:Button runat="server"
                 ID="Button_CancelAddingDependents"
                 CssClass=" btn"
-                OnClick="Button_CancelAddingDependents_Click"
+                OnClick="Button_SubmitEmployeeWithNoDependents_Click"
                 Text="Submit without dependents"></asp:Button>
         </div>
         <br />

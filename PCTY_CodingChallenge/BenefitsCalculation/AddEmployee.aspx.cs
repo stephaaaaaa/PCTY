@@ -89,9 +89,24 @@ namespace BenefitsCalculation
             string fname = TextBox_EmployeeFirstName.Text;
             string lname = TextBox_EmployeeLastName.Text;
 
-            EmployeeObject newEmployee = new EmployeeObject(fname, lname, false);
-            newEmployee.changeID(generator.Next(0, 999999));
-            BackendData.tracker.addEmployee(newEmployee);
+            using (var db = new BenefitsContext())
+            {
+                Employee newEmployee = new Employee();
+                newEmployee.firstName = fname;
+                newEmployee.lastName = lname;
+                newEmployee.hasDependent = false;
+                newEmployee.employeeNumber = generator.Next(0, 999999);
+                newEmployee.cost = 1000;
+                newEmployee.salary = 2000;
+                double discount = 0; // discount is 10% if name starts with 'a'
+                if (newEmployee.firstName.ToLower().First().Equals('a'))
+                {
+                    discount = .10;
+                    newEmployee.cost -= newEmployee.cost * discount;
+                }
+                db.Employees.Add(newEmployee);
+                db.SaveChanges();
+            }
             Response.Redirect("~/ViewEmployees.aspx");
         }
 
@@ -139,31 +154,11 @@ namespace BenefitsCalculation
             Response.Redirect("~/ViewEmployees.aspx");
         }
 
-        protected void Button_EditEmployeeName_Click(object sender, EventArgs e)
-        {
-            Button_ContinueAddingDependents.Visible = true;
-            Button_GenerateDependentFields.Visible = false;
-            Panel_AddDependents.Visible = true;
-            Panel_DependentsFields.Visible = false;
-            Panel_SubmitWithDependents.Visible = false;
-        }
-
         protected void Button_ContinueAddingDependents_Click(object sender, EventArgs e)
         {
             Button_ContinueAddingDependents.Visible = false;
             TextBoxNumberOfDependents.ReadOnly = false;
             Button_GenerateDependentFields.Visible = true;
-        }
-
-        protected void Button_CancelAddingDependents_Click(object sender, EventArgs e)
-        {
-            string fname = TextBox_EmployeeFirstName.Text;
-            string lname = TextBox_EmployeeLastName.Text;
-
-            EmployeeObject newEmployee = new EmployeeObject(fname, lname, false);
-            newEmployee.changeID(generator.Next(0, 999999));
-            BackendData.tracker.addEmployee(newEmployee);
-            Response.Redirect("~/ViewEmployees.aspx");
         }
     }
 }
