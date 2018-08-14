@@ -47,10 +47,18 @@
                 </div>
             </asp:Panel>
 
-            <asp:Panel runat="server" ID="CloserDetails_ForDependent" CssClass="col-lg-6" Visible ="false">
+            <asp:Panel runat="server" ID="CloserDetails_ForDependent" CssClass="col-lg-6" Visible="false">
                 <h2>Dependents</h2>
             </asp:Panel>
         </div>
     </div>
+    <br />
+    <div class="row">
+        <asp:Panel runat="server">
+            <asp:Button runat="server" Text="Edit Employee" CssClass="btn" />
+            <asp:Button runat="server" Text="Delete Employee" CssClass="btn btn-danger" />
+        </asp:Panel>
+    </div>
+
 
 </asp:Content>

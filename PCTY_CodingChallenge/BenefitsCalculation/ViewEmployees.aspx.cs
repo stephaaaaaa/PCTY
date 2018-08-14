@@ -101,7 +101,7 @@ namespace BenefitsCalculation
 
                 Button Button_ViewDetails = new Button();
                 Button_ViewDetails.ID = $"ViewDetails_{emp.employeeID}";
-                Button_ViewDetails.Text = "View Details";
+                Button_ViewDetails.Text = "View/Edit Details";
                 Button_ViewDetails.CssClass = "btn";
                 Button_ViewDetails.Click += new EventHandler(Button_ViewDetails_Click);
                 viewDetailsButtons.Add(Button_ViewDetails);
@@ -125,6 +125,11 @@ namespace BenefitsCalculation
             {
                 sortingButtonsPanel.Visible = true;
             }
+        }
+
+        private void Button_Delete_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Button_ViewDetails_Click(object sender, EventArgs e)
