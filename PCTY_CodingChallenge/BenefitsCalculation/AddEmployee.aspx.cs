@@ -97,13 +97,15 @@ namespace BenefitsCalculation
                 newEmployee.hasDependent = false;
                 newEmployee.employeeNumber = generator.Next(0, 999999);
                 newEmployee.cost = 1000;
-                newEmployee.salary = 2000;
+                newEmployee.paycheckBeforeDeductions = 2000;
                 double discount = 0; // discount is 10% if name starts with 'a'
                 if (newEmployee.firstName.ToLower().First().Equals('a'))
                 {
                     discount = .10;
                     newEmployee.cost -= newEmployee.cost * discount;
                 }
+                newEmployee.deductionsPerPaycheck = newEmployee.cost/26;
+                newEmployee.paycheckAfterDeductions = newEmployee.paycheckBeforeDeductions - newEmployee.deductionsPerPaycheck;
                 db.Employees.Add(newEmployee);
                 db.SaveChanges();
             }

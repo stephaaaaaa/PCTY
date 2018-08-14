@@ -15,17 +15,21 @@ namespace BenefitsCalculation
 
         [Required]
         [StringLength(100)]
-        public string firstName { get; set; }
+        public string lastName { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string lastName { get; set; }
+        public string firstName { get; set; }
 
         public bool hasDependent { get; set; }
 
         public double cost { get; set; }
 
-        public double salary { get; set; }
+        public double paycheckBeforeDeductions { get; set; }
+
+        public double deductionsPerPaycheck { get; set; }
+
+        public double paycheckAfterDeductions { get; set; }
 
         public virtual Dependent Dependent { get; set; }
     }

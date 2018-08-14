@@ -12,8 +12,14 @@ namespace BenefitsCalculation
         protected void Page_Load(object sender, EventArgs e)
         {
             int numberOfDataPopulatedRows = 0;
+            List<Employee> employeesInDB;
 
-            foreach (EmployeeObject emp in BackendData.tracker.viewEmployees())
+            using (var db = new BenefitsContext())
+            {
+                employeesInDB = db.Employees.ToList();
+            }
+
+            foreach (Employee emp in employeesInDB)
             {
                 TableCell idCell = new TableCell();
                 TableCell lastCell = new TableCell();
@@ -24,13 +30,27 @@ namespace BenefitsCalculation
                 TableCell amountPerPaycheckCell = new TableCell();
                 TableCell buttonCell = new TableCell();
 
-                idCell.Text = emp.getID();
-                lastCell.Text = emp.getLastName();
-                firstCell.Text = emp.getFirstName();
-                depNumCell.Text = emp.getDependentsCount().ToString();
-                costPerYearCell.Text = emp.getCost();
-                amountPerPaycheckCell.Text = emp.getPaycheckAfterDeductions();
-                paycheckDeductionCell.Text = emp.getDeductionsPerPaycheck();
+                idCell.Text = emp.employeeNumber.ToString();
+                lastCell.Text = emp.lastName;
+                firstCell.Text = emp.firstName;
+                List<Dependent> dependentsInDB = new List<Dependent>();
+                int dependentsCount = 0;
+                using (var db = new BenefitsContext())
+                {
+                    dependentsInDB = db.Dependents.ToList();
+                }
+                foreach (Dependent dependent in dependentsInDB)
+                {
+                    if (dependent.Employee.id == emp.id)
+                    {
+                        dependentsCount++;
+                    }
+                }
+
+                depNumCell.Text = dependentsCount.ToString();
+                costPerYearCell.Text = emp.cost.ToString("C2");
+                amountPerPaycheckCell.Text = emp.paycheckAfterDeductions.ToString("C2");
+                paycheckDeductionCell.Text = emp.deductionsPerPaycheck.ToString("C2");
 
                 Button Button_ViewDetails = new Button();
                 Button_ViewDetails.Text = "View Details";

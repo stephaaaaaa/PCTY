@@ -26,11 +26,11 @@ namespace BenefitsCalculation
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
-                .Property(e => e.firstName)
+                .Property(e => e.lastName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
-                .Property(e => e.lastName)
+                .Property(e => e.firstName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
