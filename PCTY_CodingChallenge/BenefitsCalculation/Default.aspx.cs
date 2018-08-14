@@ -28,5 +28,10 @@ namespace BenefitsCalculation
         {
             Response.Redirect("~/AddEmployee");
         }
+
+        protected void fruit_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("https://www.paylocity.com/");
+        }
     }
 }
