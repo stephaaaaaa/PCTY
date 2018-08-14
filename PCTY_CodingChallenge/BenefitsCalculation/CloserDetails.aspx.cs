@@ -12,7 +12,7 @@ namespace BenefitsCalculation
         List<Dependent> dependents = new List<Dependent>();
         List<Dependent> dependentBelongingToEmployee = new List<Dependent>();
 
-        protected void Page_Load(object sender, EventArgs e)
+        private int getIncomingEmployeeID()
         {
             string url = HttpContext.Current.Request.Url.AbsoluteUri;
             int employeeID = 0;
@@ -21,6 +21,12 @@ namespace BenefitsCalculation
                 string[] urlPortion = url.Split('=');
                 employeeID = int.Parse(urlPortion[1]);
             }
+            return employeeID;
+        }
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            int employeeID = getIncomingEmployeeID();
 
             using (var db = new BenefitsContext())
             {
