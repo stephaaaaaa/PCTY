@@ -16,7 +16,7 @@ namespace BenefitsCalculation
 
             using (var db = new BenefitsContext())
             {
-                employeesInDB = db.Employees.ToList();
+                employeesInDB = db.Employees.OrderByDescending(p => p.employeeID).ToList();
             }
 
             foreach (Employee emp in employeesInDB)
