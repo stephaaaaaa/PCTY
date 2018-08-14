@@ -9,8 +9,8 @@ namespace BenefitsCalculation
 {
     public partial class ViewEmployees : System.Web.UI.Page
     {
-        string sortingChoice;
         List<Employee> employeesInDB = new List<Employee>();
+        List<Button> viewDetailsButtons = new List<Button>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -100,9 +100,11 @@ namespace BenefitsCalculation
                 paycheckDeductionCell.Text = emp.deductionsPerPaycheck.ToString("C2");
 
                 Button Button_ViewDetails = new Button();
+                Button_ViewDetails.ID = $"ViewDetails_{emp.employeeID}";
                 Button_ViewDetails.Text = "View Details";
                 Button_ViewDetails.CssClass = "btn";
                 Button_ViewDetails.Click += new EventHandler(Button_ViewDetails_Click);
+                viewDetailsButtons.Add(Button_ViewDetails);
                 viewDetailsButtonCell.Controls.Add(Button_ViewDetails);
 
                 TableRow row = new TableRow();
@@ -127,7 +129,16 @@ namespace BenefitsCalculation
 
         private void Button_ViewDetails_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/CloserDetails");
+            string[] buttonIDComponents = new string[0];
+            for (int i = 0; i < Request.Form.Count; i++)
+            {
+                if (Request.Form.AllKeys[i].Contains("ViewDetails"))
+                {
+                    string buttonNumber = Request.Form.AllKeys[i];
+                    buttonIDComponents = buttonNumber.Split('_');
+                }
+            }
+            Response.Redirect($"CloserDetails.aspx?id={buttonIDComponents[1]}");
         }
     }
 }
