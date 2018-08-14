@@ -13,6 +13,24 @@ namespace BenefitsCalculation {
     public partial class ViewEmployees {
         
         /// <summary>
+        /// sortingButtonsPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel sortingButtonsPanel;
+        
+        /// <summary>
+        /// DropDown_SortingOptions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDown_SortingOptions;
+        
+        /// <summary>
         /// aspTablePanel control.
         /// </summary>
         /// <remarks>

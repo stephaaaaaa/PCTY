@@ -9,15 +9,62 @@ namespace BenefitsCalculation
 {
     public partial class ViewEmployees : System.Web.UI.Page
     {
+        string sortingChoice;
+        List<Employee> employeesInDB = new List<Employee>();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             int numberOfDataPopulatedRows = 0;
-            List<Employee> employeesInDB;
 
             using (var db = new BenefitsContext())
             {
                 employeesInDB = db.Employees.OrderByDescending(p => p.employeeID).ToList();
             }
+
+            #region Cases for dropdown menu changes
+            if (DropDown_SortingOptions.Text.Equals("Newest"))
+            {
+                using (var db = new BenefitsContext())
+                {
+                    employeesInDB = db.Employees.OrderByDescending(p => p.employeeID).ToList();
+                }
+            }
+            else if (DropDown_SortingOptions.Text.Equals("Oldest"))
+            {
+                using (var db = new BenefitsContext())
+                {
+                    employeesInDB = db.Employees.OrderBy(p => p.employeeID).ToList();
+                }
+            }
+            else if (DropDown_SortingOptions.Text.Equals("Last name"))
+            {
+                using (var db = new BenefitsContext())
+                {
+                    employeesInDB = db.Employees.OrderBy(p => p.lastName).ToList();
+                }
+            }
+            else if (DropDown_SortingOptions.Text.Equals("First name"))
+            {
+                using (var db = new BenefitsContext())
+                {
+                    employeesInDB = db.Employees.OrderBy(p => p.firstName).ToList();
+                }
+            }
+            else if (DropDown_SortingOptions.Text.Equals("Dependents (high to low)"))
+            {
+                using (var db = new BenefitsContext())
+                {
+                    employeesInDB = db.Employees.OrderByDescending(p => p.Dependents.Count).ToList();
+                }
+            }
+            else if (DropDown_SortingOptions.Text.Equals("Dependents (low to high)"))
+            {
+                using (var db = new BenefitsContext())
+                {
+                    employeesInDB = db.Employees.OrderBy(p => p.Dependents.Count).ToList();
+                }
+            }
+            #endregion
 
             foreach (Employee emp in employeesInDB)
             {
@@ -28,7 +75,7 @@ namespace BenefitsCalculation
                 TableCell costPerYearCell = new TableCell();
                 TableCell paycheckDeductionCell = new TableCell();
                 TableCell amountPerPaycheckCell = new TableCell();
-                TableCell buttonCell = new TableCell();
+                TableCell viewDetailsButtonCell = new TableCell();
 
                 idCell.Text = emp.employeeNumber.ToString();
                 lastCell.Text = emp.lastName;
@@ -56,7 +103,7 @@ namespace BenefitsCalculation
                 Button_ViewDetails.Text = "View Details";
                 Button_ViewDetails.CssClass = "btn";
                 Button_ViewDetails.Click += new EventHandler(Button_ViewDetails_Click);
-                buttonCell.Controls.Add(Button_ViewDetails);
+                viewDetailsButtonCell.Controls.Add(Button_ViewDetails);
 
                 TableRow row = new TableRow();
 
@@ -67,10 +114,14 @@ namespace BenefitsCalculation
                 row.Cells.Add(costPerYearCell);
                 row.Cells.Add(paycheckDeductionCell);
                 row.Cells.Add(amountPerPaycheckCell);
-                row.Cells.Add(buttonCell);
+                row.Cells.Add(viewDetailsButtonCell);
 
                 Table_EmployeeView.Rows.Add(row);
                 numberOfDataPopulatedRows++;
+            }
+            if (numberOfDataPopulatedRows > 1)
+            {
+                sortingButtonsPanel.Visible = true;
             }
         }
 
