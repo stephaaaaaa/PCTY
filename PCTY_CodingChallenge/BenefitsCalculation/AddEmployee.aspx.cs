@@ -9,7 +9,6 @@ namespace BenefitsCalculation
 {
     public partial class AddEmployee : System.Web.UI.Page
     {
-        //private int numberOfDependents;
         private TextBox[] fName_TextBoxes;
         private TextBox[] lName_TextBoxes;
         private Random generator;
@@ -18,6 +17,57 @@ namespace BenefitsCalculation
         {
             generator = new Random();
         }
+
+        #region Generic employee creation helpers
+        private Employee createStandardEmployeeWithDependents(string fname, string lname)
+        {
+            Employee newEmployee = new Employee();
+            newEmployee.firstName = fname;
+            newEmployee.lastName = lname;
+            newEmployee.employeeNumber = generator.Next(0, 999999);
+            newEmployee.hasDependent = true;
+            newEmployee.cost = 1000;
+            newEmployee.paycheckBeforeDeductions = 2000;
+            apply10PercentOffIfApplicable(newEmployee);
+            newEmployee.deductionsPerPaycheck = newEmployee.cost / 26;
+            newEmployee.paycheckAfterDeductions = newEmployee.paycheckBeforeDeductions - newEmployee.deductionsPerPaycheck;
+
+            return newEmployee;
+        }
+
+        private void apply10PercentOffIfApplicable(Employee emp)
+        {
+            if (emp.firstName.ToLower().First().Equals('a'))
+            {
+                emp.cost -= emp.cost * .10;
+            }
+        }
+
+        private void apply10PercentOffIfApplicable(Dependent dep)
+        {
+            if (dep.firstName.ToLower().First().Equals('a'))
+            {
+                dep.cost -= dep.cost * .10;
+            }
+        }
+
+        private Employee createStandardEmployeeNoDependents(string fname, string lname)
+        {
+            Employee newEmployee = new Employee();
+            newEmployee.firstName = fname;
+            newEmployee.lastName = lname;
+            newEmployee.employeeNumber = generator.Next(0, 999999);
+            newEmployee.hasDependent = false;
+            newEmployee.cost = 1000;
+            newEmployee.paycheckBeforeDeductions = 2000;
+            apply10PercentOffIfApplicable(newEmployee);
+            newEmployee.deductionsPerPaycheck = newEmployee.cost / 26;
+            newEmployee.paycheckAfterDeductions = newEmployee.paycheckBeforeDeductions - newEmployee.deductionsPerPaycheck;
+
+            return newEmployee;
+        }
+        #endregion
+
 
         protected void Button_AddDependent_Click(object sender, EventArgs e)
         {
@@ -89,43 +139,35 @@ namespace BenefitsCalculation
             string fname = TextBox_EmployeeFirstName.Text;
             string lname = TextBox_EmployeeLastName.Text;
 
+            Employee newEmployee = createStandardEmployeeNoDependents(fname, lname);
+
             using (var db = new BenefitsContext())
             {
-                Employee newEmployee = new Employee();
-                newEmployee.firstName = fname;
-                newEmployee.lastName = lname;
-                newEmployee.hasDependent = false;
-                newEmployee.employeeNumber = generator.Next(0, 999999);
-                newEmployee.cost = 1000;
-                newEmployee.paycheckBeforeDeductions = 2000;
-                double discount = 0; // discount is 10% if name starts with 'a'
-                if (newEmployee.firstName.ToLower().First().Equals('a'))
-                {
-                    discount = .10;
-                    newEmployee.cost -= newEmployee.cost * discount;
-                }
-                newEmployee.deductionsPerPaycheck = newEmployee.cost/26;
-                newEmployee.paycheckAfterDeductions = newEmployee.paycheckBeforeDeductions - newEmployee.deductionsPerPaycheck;
                 db.Employees.Add(newEmployee);
                 db.SaveChanges();
             }
             Response.Redirect("~/ViewEmployees.aspx");
         }
 
+
         protected void Button_SubmitWithDependents_Click(object sender, EventArgs e)
         {
             string employee_fname = TextBox_EmployeeFirstName.Text;
             string employee_lname = TextBox_EmployeeLastName.Text;
 
-            EmployeeObject newEmployee = new EmployeeObject(employee_fname, employee_lname, true);
-            newEmployee.changeID(generator.Next(0, 999999));
-
-            string dep_firstName = "";
-            string dep_lastName = "";
+            Employee newEmployee = createStandardEmployeeWithDependents(employee_fname, employee_lname);
+            using (var db = new BenefitsContext())
+            {
+                db.Employees.Add(newEmployee);
+                db.SaveChanges();
+            }
             for (int i = 0; i < Request.Form.Count; i++)
             {
                 if (Request.Form.AllKeys[i].Contains("dep_FirstName")) // indicates that the text boxes exist
                 {
+                    Dependent newDependent = new Dependent();
+                    newDependent.cost = 500;
+
                     int ParamStartPoint = Request.Form.AllKeys[i].IndexOf("dep_First");
                     int ParamNameLength = Request.Form.AllKeys[i].Length - ParamStartPoint - 1;
 
@@ -133,7 +175,7 @@ namespace BenefitsCalculation
 
                     if (ControlName[0] == "dep_FirstName")
                     {
-                        dep_firstName = Request.Form[i];
+                        newDependent.firstName = Request.Form[i];
                     }
                     i++;
                     if (Request.Form.AllKeys[i].Contains("dep_LastName")) // indicates that the text boxes exist
@@ -145,14 +187,26 @@ namespace BenefitsCalculation
 
                         if (ControlName2[0] == "dep_LastName")
                         {
-                            dep_lastName = Request.Form[i];
+                            newDependent.lastName = Request.Form[i];
                         }
                     }
-                    DependentObject newDependent = new DependentObject(dep_firstName, dep_lastName, newEmployee.getFullName());
-                    newEmployee.addDependent(newDependent);
+                    apply10PercentOffIfApplicable(newDependent);
+                    newEmployee.cost += newDependent.cost;
+                    newDependent.employeeID = newEmployee.employeeID;
+                    //newDependent.Employee.id = newEmployee.id;
+                    using (var db = new BenefitsContext())
+                    {
+                        db.Dependents.Add(newDependent);
+                        Employee employeeToUpdate = db.Employees.Find(newEmployee.employeeID);
+                        employeeToUpdate.cost = newEmployee.cost;
+                        employeeToUpdate.deductionsPerPaycheck = employeeToUpdate.cost / 26;
+                        employeeToUpdate.paycheckBeforeDeductions = 2000;
+                        employeeToUpdate.paycheckAfterDeductions = employeeToUpdate.paycheckBeforeDeductions - employeeToUpdate.deductionsPerPaycheck;
+                        db.SaveChanges();
+                    }
                 }
             }
-            BackendData.tracker.addEmployee(newEmployee);
+
             Response.Redirect("~/ViewEmployees.aspx");
         }
 

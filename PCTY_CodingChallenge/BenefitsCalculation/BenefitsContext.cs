@@ -32,10 +32,6 @@ namespace BenefitsCalculation
             modelBuilder.Entity<Employee>()
                 .Property(e => e.firstName)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Employee>()
-                .HasOptional(e => e.Dependent)
-                .WithRequired(e => e.Employee);
         }
     }
 }

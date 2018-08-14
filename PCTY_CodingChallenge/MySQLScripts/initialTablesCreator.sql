@@ -1,7 +1,7 @@
 Use PCTYBenefitsData;
 
 Create table Employee(
-id int primary key auto_increment,
+employeeID int primary key auto_increment,
 employeeNumber int,
 lastName varchar(100) not null,
 firstName varchar(100) not null,
@@ -17,6 +17,7 @@ Create table Dependent(
 id int primary key auto_increment,
 firstName varchar(100) not null,
 lastName varchar(100) not null,
-foreign key (id) references Employee(id),
+employeeID int,
+foreign key (employeeID) references Employee(employeeID),
 cost double not null
 );

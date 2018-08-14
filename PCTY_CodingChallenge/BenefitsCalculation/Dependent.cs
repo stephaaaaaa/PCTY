@@ -19,6 +19,8 @@ namespace BenefitsCalculation
         [StringLength(100)]
         public string lastName { get; set; }
 
+        public int? employeeID { get; set; }
+
         public double cost { get; set; }
 
         public virtual Employee Employee { get; set; }

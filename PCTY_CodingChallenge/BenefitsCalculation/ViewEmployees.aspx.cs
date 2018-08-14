@@ -41,7 +41,7 @@ namespace BenefitsCalculation
                 }
                 foreach (Dependent dependent in dependentsInDB)
                 {
-                    if (dependent.Employee.id == emp.id)
+                    if (dependent.employeeID == emp.employeeID)
                     {
                         dependentsCount++;
                     }

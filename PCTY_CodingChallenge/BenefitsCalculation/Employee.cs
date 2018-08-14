@@ -9,7 +9,13 @@ namespace BenefitsCalculation
     [Table("PCTYBenefitsData.Employee")]
     public partial class Employee
     {
-        public int id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Employee()
+        {
+            Dependents = new HashSet<Dependent>();
+        }
+
+        public int employeeID { get; set; }
 
         public int? employeeNumber { get; set; }
 
@@ -31,6 +37,7 @@ namespace BenefitsCalculation
 
         public double paycheckAfterDeductions { get; set; }
 
-        public virtual Dependent Dependent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Dependent> Dependents { get; set; }
     }
 }
