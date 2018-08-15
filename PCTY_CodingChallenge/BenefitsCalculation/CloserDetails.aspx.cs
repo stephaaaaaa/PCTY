@@ -207,7 +207,7 @@ namespace BenefitsCalculation
                     dependentToEdit_ID = int.Parse(buttonIDComponents[1]);
                 }
             }
-            Response.Redirect($"EditPerson.aspx?id={dependentToEdit_ID}");
+            Response.Redirect($"EditPerson.aspx?id=d_{dependentToEdit_ID}");
         }
 
         // delete the employee, and then any dependents associated
@@ -251,7 +251,7 @@ namespace BenefitsCalculation
                     dependentToEdit_ID = int.Parse(buttonIDComponents[1]);
                 }
             }
-            Response.Redirect($"EditPerson.aspx?id={dependentToEdit_ID}");
+            Response.Redirect($"EditPerson.aspx?id=e_{dependentToEdit_ID}");
         }
 
     }
