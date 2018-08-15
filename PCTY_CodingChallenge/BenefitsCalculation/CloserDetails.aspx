@@ -7,13 +7,17 @@
             <asp:Panel runat="server" ID="CloserDetails_ForEmployee" CssClass="col-lg-6">
                 <h2>Provider</h2>
                 <div class="row">
-                    <asp:Label runat="server"> Full name: </asp:Label>
-                    <asp:Label runat="server" ID="LabelEmployeeFullName">
-                    </asp:Label>
+                    <h4>
+                        <asp:Label runat="server"> Full name: </asp:Label>
+                        <asp:Label runat="server" ID="LabelEmployeeFullName">
+                        </asp:Label>
+                    </h4>
                 </div>
                 <div class="row">
-                    <asp:Label runat="server"> Employee number: </asp:Label>
-                    <asp:Label runat="server" ID="LabelEmployeeNumber"> </asp:Label>
+                    <h4>
+                        <asp:Label runat="server"> Employee number: </asp:Label>
+                        <asp:Label runat="server" ID="LabelEmployeeNumber"> </asp:Label>
+                    </h4>
                 </div>
                 <br />
                 <div class="row">

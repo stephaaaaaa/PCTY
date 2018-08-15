@@ -16,7 +16,7 @@ namespace BenefitsCalculation
         #endregion
 
         #region helper methods
-        private int getIncomingEmployeeID()
+        private void getIncomingEmployeeID()
         {
             string url = HttpContext.Current.Request.Url.AbsoluteUri;
             if (url.Contains("id="))
@@ -24,7 +24,6 @@ namespace BenefitsCalculation
                 string[] urlPortion = url.Split('=');
                 incomingEmployeeID = int.Parse(urlPortion[1]);
             }
-            return incomingEmployeeID;
         }
 
         private double getCostAccruedByDependents()
@@ -73,13 +72,42 @@ namespace BenefitsCalculation
                 dependents = db.Dependents.ToList();
             }
         }
+
+        private void initializeDependentButtons(Dependent dep, Button button_EditDependent, Button button_DeleteDependent)
+        {
+            button_EditDependent.ID = $"Edit_{dep.id}";
+            button_EditDependent.Text = "Edit";
+            button_EditDependent.CssClass = "btn";
+            button_EditDependent.Click += new EventHandler(button_EditDependent_Click);
+
+            button_DeleteDependent.ID = $"Delete_{dep.id}";
+            button_DeleteDependent.CssClass = "btn btn-danger";
+            button_DeleteDependent.Text = "Delete";
+            button_DeleteDependent.Click += new EventHandler(button_DeleteDependent_Click);
+
+        }
+
+        private void initializeProviderLabels(double costAccruedByDependents)
+        {
+            LabelEmployeeFullName.Text = $"{employeeToView.firstName} {employeeToView.lastName}";
+            LabelEmployeeNumber.Text = $"{employeeToView.employeeNumber}";
+            LabelBenefitsCost.Text = $"{employeeToView.cost.ToString("C2")}";
+            LabelNumOfDependents.Text = $"{dependentBelongingToEmployee.Count}";
+            LabelEmployeeSalary.Text = $"{employeeToView.paycheckBeforeDeductions.ToString("C2")}";
+            LabelAmountIncreasedByDependents.Text = $"{costAccruedByDependents.ToString("C2")}";
+            LabelDeductionsPerPaycheck.Text = $"{employeeToView.deductionsPerPaycheck.ToString("C2")}";
+            LabelAfterDeductions.Text = $"{employeeToView.paycheckAfterDeductions.ToString("C2")}";
+            LabelEmployeeBaseCost.Text = $"{(employeeToView.cost - costAccruedByDependents).ToString("C2")}";
+
+        }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            int employeeID = getIncomingEmployeeID();
-
+            getIncomingEmployeeID();
             initializePeopleLists();
+
 
             if (employeeToView.hasDependent == true)
                 CloserDetails_ForDependent.Visible = true;
@@ -94,12 +122,8 @@ namespace BenefitsCalculation
             {
                 Button button_EditDependent = new Button();
                 Button button_DeleteDependent = new Button();
-                button_EditDependent.ID = $"{dep.id}_Edit";
-                button_EditDependent.Text = "Edit";
-                button_EditDependent.CssClass = "btn";
-                button_DeleteDependent.ID = $"{dep.id}_Delete";
-                button_DeleteDependent.CssClass = "btn btn-danger";
-                button_DeleteDependent.Text = "Delete";
+
+                initializeDependentButtons(dep, button_EditDependent, button_DeleteDependent);
 
                 TableCell lastCell = new TableCell();
                 lastCell.Text = dep.lastName;
@@ -124,15 +148,53 @@ namespace BenefitsCalculation
             dependentsDetail.Attributes.Add("class", "table custom-table table-hover");
             CloserDetails_ForDependent.Controls.Add(dependentsDetail);
 
-            LabelEmployeeFullName.Text = $"{employeeToView.firstName} {employeeToView.lastName}";
-            LabelEmployeeNumber.Text = $"{employeeToView.employeeNumber}";
-            LabelBenefitsCost.Text = $"{employeeToView.cost.ToString("C2")}";
-            LabelNumOfDependents.Text = $"{dependentBelongingToEmployee.Count}";
-            LabelEmployeeSalary.Text = $"{employeeToView.paycheckBeforeDeductions.ToString("C2")}";
-            LabelAmountIncreasedByDependents.Text = $"{costAccruedByDependents.ToString("C2")}";
-            LabelDeductionsPerPaycheck.Text = $"{employeeToView.deductionsPerPaycheck.ToString("C2")}";
-            LabelAfterDeductions.Text = $"{employeeToView.paycheckAfterDeductions.ToString("C2")}";
-            LabelEmployeeBaseCost.Text = $"{(employeeToView.cost - costAccruedByDependents).ToString("C2")}";
+            initializeProviderLabels(costAccruedByDependents);
+
+        }
+
+        private void button_DeleteDependent_Click(object sender, EventArgs e)
+        {
+            string[] buttonIDComponents = new string[0];
+            int dependentToDelete_ID = 0;
+            for (int i = 0; i < Request.Form.Count; i++)
+            {
+                if (Request.Form.AllKeys[i].Contains("Delete"))
+                {
+                    string buttonNumber = Request.Form.AllKeys[i];
+                    buttonIDComponents = buttonNumber.Split('_');
+                    dependentToDelete_ID = int.Parse(buttonIDComponents[1]);
+                }
+            }
+
+            using (var db = new BenefitsContext())
+            {
+                Dependent toDelete = db.Dependents.FirstOrDefault(p => p.id == dependentToDelete_ID);
+                Employee toUpdate = db.Employees.First(p => p.employeeID == incomingEmployeeID);
+
+                foreach (Dependent d in dependentBelongingToEmployee)
+                {
+                    if (d.id == toDelete.id)
+                    {
+                        dependentBelongingToEmployee.Remove(d);
+                        break;
+                    }
+                }
+                if (dependentBelongingToEmployee.Count < 1)
+                    toUpdate.hasDependent = false;
+
+                toUpdate.cost -= toDelete.cost;
+                toUpdate.deductionsPerPaycheck = toUpdate.cost / 26;
+                toUpdate.paycheckAfterDeductions = toUpdate.paycheckBeforeDeductions - toUpdate.deductionsPerPaycheck;
+
+                db.Dependents.Remove(toDelete);
+                db.SaveChanges();
+            }
+            Response.Redirect(HttpContext.Current.Request.Url.AbsoluteUri);
+        }
+
+        private void button_EditDependent_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }
