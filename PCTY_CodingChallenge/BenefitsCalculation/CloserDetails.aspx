@@ -4,7 +4,7 @@
 
     <div>
         <div class="row">
-            <asp:Panel runat="server" ID="CloserDetails_ForEmployee" CssClass="col-lg-6">
+            <asp:Panel runat="server" ID="CloserDetails_ForEmployee" CssClass="col-lg-5 well">
                 <h2>Provider</h2>
                 <div class="row">
                     <h4>
@@ -51,7 +51,7 @@
                 </div>
             </asp:Panel>
 
-            <asp:Panel runat="server" ID="CloserDetails_ForDependent" CssClass="col-lg-6" Visible="false">
+            <asp:Panel runat="server" ID="CloserDetails_ForDependent" CssClass="col-lg-6 col-lg-offset-1" Visible="false">
                 <h2>Dependents</h2>
             </asp:Panel>
         </div>
@@ -59,8 +59,8 @@
     <br />
     <div class="row">
         <asp:Panel runat="server">
-            <asp:Button runat="server" Text="Edit Employee" CssClass="btn" />
-            <asp:Button runat="server" Text="Delete Employee" CssClass="btn btn-danger" />
+            <asp:Button ID="button_EditEmployee" runat="server" Text="Edit Employee" CssClass="btn" OnClick="button_EditEmployee_Click" />
+            <asp:Button ID="button_DeleteEmployee" runat="server" Text="Delete Employee" CssClass="btn btn-danger" OnClick="button_DeleteEmployee_Click" />
         </asp:Panel>
     </div>
 

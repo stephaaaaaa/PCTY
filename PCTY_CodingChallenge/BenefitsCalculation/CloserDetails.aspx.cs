@@ -108,6 +108,8 @@ namespace BenefitsCalculation
             getIncomingEmployeeID();
             initializePeopleLists();
 
+            button_EditEmployee.ID = $"buttonEditEmployee_{incomingEmployeeID}";
+            button_DeleteEmployee.ID = $"buttonDeleteEmployee_{incomingEmployeeID}";
 
             if (employeeToView.hasDependent == true)
                 CloserDetails_ForDependent.Visible = true;
@@ -194,7 +196,63 @@ namespace BenefitsCalculation
 
         private void button_EditDependent_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            string[] buttonIDComponents = new string[0];
+            int dependentToEdit_ID = 0;
+            for (int i = 0; i < Request.Form.Count; i++)
+            {
+                if (Request.Form.AllKeys[i].Contains("Edit"))
+                {
+                    string buttonNumber = Request.Form.AllKeys[i];
+                    buttonIDComponents = buttonNumber.Split('_');
+                    dependentToEdit_ID = int.Parse(buttonIDComponents[1]);
+                }
+            }
+            Response.Redirect($"EditPerson.aspx?id={dependentToEdit_ID}");
         }
+
+        // delete the employee, and then any dependents associated
+        protected void button_DeleteEmployee_Click(object sender, EventArgs e)
+        {
+            string[] buttonIDComponents = new string[0];
+            int employeeToDelete_ID = 0;
+            for (int i = 0; i < Request.Form.Count; i++)
+            {
+                if (Request.Form.AllKeys[i].Contains("Delete"))
+                {
+                    string buttonNumber = Request.Form.AllKeys[i];
+                    buttonIDComponents = buttonNumber.Split('_');
+                    employeeToDelete_ID = int.Parse(buttonIDComponents[1]);
+                }
+            }
+            using (var db = new BenefitsContext())
+            {
+                Employee toDelete = db.Employees.FirstOrDefault(p => p.employeeID == employeeToDelete_ID);
+                foreach (Dependent d in dependentBelongingToEmployee)
+                {
+                    Dependent dependentToDelete = db.Dependents.FirstOrDefault(p => p.id == d.id);
+                    db.Dependents.Remove(dependentToDelete);
+                }
+                db.Employees.Remove(toDelete);
+                db.SaveChanges();
+            }
+            Response.Redirect($"ViewEmployees");
+        }
+
+        protected void button_EditEmployee_Click(object sender, EventArgs e)
+        {
+            string[] buttonIDComponents = new string[0];
+            int dependentToEdit_ID = 0;
+            for (int i = 0; i < Request.Form.Count; i++)
+            {
+                if (Request.Form.AllKeys[i].Contains("Edit"))
+                {
+                    string buttonNumber = Request.Form.AllKeys[i];
+                    buttonIDComponents = buttonNumber.Split('_');
+                    dependentToEdit_ID = int.Parse(buttonIDComponents[1]);
+                }
+            }
+            Response.Redirect($"EditPerson.aspx?id={dependentToEdit_ID}");
+        }
+
     }
 }
