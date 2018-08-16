@@ -112,30 +112,30 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.TextBox textBox_dependentFName;
         
         /// <summary>
-        /// textBox_DependentLName control.
+        /// textBox_dependentLName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textBox_DependentLName;
+        protected global::System.Web.UI.WebControls.TextBox textBox_dependentLName;
         
         /// <summary>
-        /// button1 control.
+        /// button_depSubmitChanges control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button1;
+        protected global::System.Web.UI.WebControls.Button button_depSubmitChanges;
         
         /// <summary>
-        /// button2 control.
+        /// button_depCancelChanges control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button2;
+        protected global::System.Web.UI.WebControls.Button button_depCancelChanges;
     }
 }

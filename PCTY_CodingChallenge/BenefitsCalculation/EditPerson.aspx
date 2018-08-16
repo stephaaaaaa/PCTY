@@ -53,8 +53,8 @@
             </div>
             <br />
             <div class="row col-lg-6">
-                <asp:Button runat="server" Text="Submit Changes" ID="button_SubmitChanges" CssClass="btn btn-default"></asp:Button>
-                <asp:Button runat="server" Text="Cancel Changes" ID="button_CancelChanges" CssClass="btn btn-default"></asp:Button>
+                <asp:Button runat="server" Text="Submit Changes" ID="button_SubmitChanges" CssClass="btn btn-default" OnClick="button_SubmitChanges_Click"></asp:Button>
+                <asp:Button runat="server" Text="Cancel Changes" ID="button_CancelChanges" CssClass="btn btn-default" OnClick="button_CancelChanges_Click"></asp:Button>
             </div>
         </asp:Panel>
     </asp:Panel>
@@ -93,7 +93,7 @@
                     runat="server"
                     CssClass="col-lg-2"> Dependent Last Name
                 </asp:Label>
-                <asp:TextBox runat="server" ID="textBox_DependentLName" CssClass="form-control col-lg-1"></asp:TextBox>
+                <asp:TextBox runat="server" ID="textBox_dependentLName" CssClass="form-control col-lg-1"></asp:TextBox>
                 <asp:RequiredFieldValidator
                     runat="server"
                     ControlToValidate="textBox_DependentLName"
@@ -110,8 +110,8 @@
             </div>
             <br />
             <div class="row col-lg-6">
-                <asp:Button runat="server" Text="Submit Changes" ID="button1" CssClass="btn btn-default"></asp:Button>
-                <asp:Button runat="server" Text="Cancel Changes" ID="button2" CssClass="btn btn-default"></asp:Button>
+                <asp:Button runat="server" Text="Submit Changes" ID="button_depSubmitChanges" CssClass="btn btn-default" OnClick="button_SubmitChanges_Click"></asp:Button>
+                <asp:Button runat="server" Text="Cancel Changes" ID="button_depCancelChanges" CssClass="btn btn-default" OnClick="button_CancelChanges_Click"></asp:Button>
             </div>
         </asp:Panel>
 
