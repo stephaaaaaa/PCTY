@@ -237,11 +237,7 @@ namespace BenefitsCalculation
                 db.SaveChanges();
                 Response.Redirect($"CloserDetails?id={toSubmit.employeeID}");
             }
-
         }
-
-
-
         #endregion
     }
 }

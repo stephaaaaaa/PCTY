@@ -107,6 +107,7 @@ namespace BenefitsCalculation
         {
             getIncomingEmployeeID();
             initializePeopleLists();
+            CloserDetails_ForDependent.Visible = true;
 
             button_EditEmployee.ID = $"buttonEditEmployee_{incomingEmployeeID}";
             button_DeleteEmployee.ID = $"buttonDeleteEmployee_{incomingEmployeeID}";
@@ -151,7 +152,6 @@ namespace BenefitsCalculation
             CloserDetails_ForDependent.Controls.Add(dependentsDetail);
 
             initializeProviderLabels(costAccruedByDependents);
-
         }
 
         private void button_DeleteDependent_Click(object sender, EventArgs e)
@@ -210,7 +210,6 @@ namespace BenefitsCalculation
             Response.Redirect($"EditPerson.aspx?id=d_{dependentToEdit_ID}");
         }
 
-        // delete the employee, and then any dependents associated
         protected void button_DeleteEmployee_Click(object sender, EventArgs e)
         {
             string[] buttonIDComponents = new string[0];

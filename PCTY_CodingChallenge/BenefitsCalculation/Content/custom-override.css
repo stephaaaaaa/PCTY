@@ -49,3 +49,12 @@ tr:hover {
 .navbar.navbar-inverse.navbar-fixed-top.custom-pcty-navbar {
     color: #939399;
 }
+
+.employee-padding fieldset {
+    padding: 120px 15px 200px 0px;
+}
+
+.div.buttons-padding fieldset {
+    padding-top: 100px;
+    display:block;
+}
