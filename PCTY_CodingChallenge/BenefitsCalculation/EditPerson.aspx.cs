@@ -114,6 +114,60 @@ namespace BenefitsCalculation
                 }
             }
         }
+
+        /// <summary>
+        /// Method to change the 10% discount for dependents, if necessary
+        /// </summary>
+        /// <param name="toSubmit"></param>
+        /// <param name="firstInitialBeforeChanges"></param>
+        /// <param name="firstInitialAfterChanges"></param>
+        private void alterDependentDiscount(Dependent toSubmit, char firstInitialBeforeChanges, char firstInitialAfterChanges)
+        {
+            // if their name didn't start with a, give them a discount
+            if (!firstInitialBeforeChanges.Equals('a') && firstInitialAfterChanges.Equals('a'))
+            {
+                toSubmit.Employee.cost -= toSubmit.cost;
+                toSubmit.cost -= toSubmit.cost * .10;
+                toSubmit.Employee.cost += toSubmit.cost;
+                toSubmit.Employee.deductionsPerPaycheck = toSubmit.Employee.cost / 26;
+                toSubmit.Employee.paycheckAfterDeductions = toSubmit.Employee.paycheckBeforeDeductions - toSubmit.Employee.deductionsPerPaycheck;
+            }
+            // if their name started with a and is changed to a non a name, remove discount
+            else if (firstInitialBeforeChanges.Equals('a') && !firstInitialAfterChanges.Equals('a'))
+            {
+                toSubmit.Employee.cost -= toSubmit.cost;
+                toSubmit.cost = 500; // 500 is base dependent cost
+                toSubmit.Employee.cost += toSubmit.cost;
+                toSubmit.Employee.deductionsPerPaycheck = toSubmit.Employee.cost / 26;
+                toSubmit.Employee.paycheckAfterDeductions = toSubmit.Employee.paycheckBeforeDeductions - toSubmit.Employee.deductionsPerPaycheck;
+            }
+        }
+
+        /// <summary>
+        /// Method to change the 10% discount for employees, if necessary
+        /// </summary>
+        /// <param name="toSubmit"></param>
+        /// <param name="firstInitialBeforeChanges"></param>
+        /// <param name="firstInitialAfterChanges"></param>
+        private void alterEmployeeDiscount(Employee toSubmit, char firstInitialBeforeChanges, char firstInitialAfterChanges)
+        {
+            // if their name did not start with a and is changed to an a name
+            if (!firstInitialBeforeChanges.Equals('a') && firstInitialAfterChanges.Equals('a'))
+            {
+                toSubmit.cost -= 1000; // 1000 is the base cost
+                toSubmit.cost += (1000 - 1000 * .10);
+                toSubmit.deductionsPerPaycheck = toSubmit.cost / 26;
+                toSubmit.paycheckAfterDeductions = toSubmit.paycheckBeforeDeductions - toSubmit.deductionsPerPaycheck;
+            }
+            // if their name started with a and is changed to a non a name, remove discount
+            else if (firstInitialBeforeChanges.Equals('a') && !firstInitialAfterChanges.Equals('a'))
+            {
+                toSubmit.cost -= (1000 - (1000 * .10)); // 1000 is the base cost
+                toSubmit.cost += 1000;
+                toSubmit.deductionsPerPaycheck = toSubmit.cost / 26;
+                toSubmit.paycheckAfterDeductions = toSubmit.paycheckBeforeDeductions - toSubmit.deductionsPerPaycheck;
+            }
+        }
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -159,38 +213,34 @@ namespace BenefitsCalculation
 
         protected void button_SubmitChanges_Click(object sender, EventArgs e)
         {
-            using (var db = new BenefitsContext())
-            {
-                if (isDependent)
-                {
-                    Dependent toSubmit = db.Dependents.FirstOrDefault(p => p.id == depToEdit.id);
-                    getChangedNames(toSubmit);
+            var db = new BenefitsContext();
 
-                    if (toSubmit.firstName.ToLower().First().Equals('a'))
-                    {
-                        toSubmit.Employee.cost -= toSubmit.cost;
-                        toSubmit.cost -= toSubmit.cost * .10;
-                        toSubmit.Employee.cost += toSubmit.cost;
-                        toSubmit.Employee.deductionsPerPaycheck = toSubmit.Employee.cost / 26;
-                        toSubmit.Employee.paycheckAfterDeductions = toSubmit.Employee.paycheckBeforeDeductions - toSubmit.Employee.deductionsPerPaycheck;
-                        db.SaveChanges();
-                    }
-                }
-                else if (isEmployee)
-                {
-                    Employee toSubmit = db.Employees.FirstOrDefault(p => p.employeeID == empToEdit.employeeID);
-                    getChangedNames(toSubmit);
-                    if (toSubmit.firstName.ToLower().First().Equals('a'))
-                    {
-                        toSubmit.cost -= 1000; // 1000 is the base cost
-                        toSubmit.cost += (1000 - 1000 * .10);
-                        toSubmit.deductionsPerPaycheck = toSubmit.cost / 26;
-                        toSubmit.paycheckAfterDeductions = toSubmit.paycheckBeforeDeductions - toSubmit.deductionsPerPaycheck;
-                        db.SaveChanges();
-                    }
-                }
+            if (isDependent)
+            {
+                Dependent toSubmit = db.Dependents.FirstOrDefault(p => p.id == depToEdit.id);
+                char firstInitialBeforeChanges = toSubmit.firstName.ToLower().First();
+                getChangedNames(toSubmit);
+                char firstInitialAfterChanges = toSubmit.firstName.ToLower().First();
+                alterDependentDiscount(toSubmit, firstInitialBeforeChanges, firstInitialAfterChanges);
+
+                db.SaveChanges();
+                Response.Redirect($"CloserDetails?id={toSubmit.employeeID}");
             }
+            else if (isEmployee)
+            {
+                Employee toSubmit = db.Employees.FirstOrDefault(p => p.employeeID == empToEdit.employeeID);
+                char firstInitialBeforeChanges = toSubmit.firstName.ToLower().First();
+                getChangedNames(toSubmit);
+                char firstInitialAfterChanges = toSubmit.firstName.ToLower().First();
+
+                alterEmployeeDiscount(toSubmit, firstInitialBeforeChanges, firstInitialAfterChanges);
+                db.SaveChanges();
+                Response.Redirect($"CloserDetails?id={toSubmit.employeeID}");
+            }
+
         }
+
+
 
         #endregion
     }
