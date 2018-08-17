@@ -202,6 +202,7 @@
     <Content Include="PCTYBenefitsData_DataSet.xss">
       <DependentUpon>PCTYBenefitsData_DataSet.xsd</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\paylocitybenefitscalculator - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\mac.png" />
     <Content Include="Images\orange-gradient-linear-white-1920x1080-c2-ff8c00-ffffff-a-315-f-14.png" />
