@@ -57,6 +57,8 @@
                 <div class="navbar-collapse collapse navbar-custom">
                     <ul class="nav navbar-nav navbar-custom">
                         <li><a runat="server" class="navbar-custom" href="~/">Home</a></li>
+                        <li><a runat="server" href="~/AddEmployee">Add Employee</a></li>
+                        <li><a runat="server" href="~/ViewEmployees">View Employees</a></li>
                         <li><a runat="server" href="~/Contact">Contact</a></li>
                         <%--                        <li><a runat="server" href="~/About">About</a></li>--%>
                     </ul>

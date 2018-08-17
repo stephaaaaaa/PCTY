@@ -210,7 +210,6 @@
     <Content Include="Images\pcty_benefitscalculator_white.png" />
     <Content Include="Images\pcty_challengeLogo_webSize.png" />
     <Content Include="Images\redOrangeGradient.jpg" />
-    <Content Include="ModifyEmployee.aspx" />
     <Content Include="pcty_favicon.ico" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -297,13 +296,6 @@
     <Compile Include="Employee.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="ModifyEmployee.aspx.cs">
-      <DependentUpon>ModifyEmployee.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ModifyEmployee.aspx.designer.cs">
-      <DependentUpon>ModifyEmployee.aspx</DependentUpon>
     </Compile>
     <Compile Include="PCTYBenefitsData_DataSet.Designer.cs">
       <AutoGen>True</AutoGen>

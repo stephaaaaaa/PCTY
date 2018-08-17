@@ -10,16 +10,11 @@
         </p>
     </div>
 
-
-
     <div class="row">
-
         <asp:Panel runat="server" ID="AddEmployee" CssClass="center-block">
             <div class="col-md-4">
                 <h2>Add an employee</h2>
-                <p>
-                    Add your employee's information, along with information about any dependents.
-                </p>
+                <p>Add your employee's information, along with information about any dependents.</p>
                 <p>
                     <asp:LinkButton
                         runat="server"
@@ -35,10 +30,7 @@
         <asp:Panel ID="ViewEmployees" runat="server" CssClass="center-block">
             <div class="col-md-4">
                 <h2>View employees</h2>
-                <p>
-                    Get an birds-eye view of who you're keeping track of. Any modifications that come to mind, can
-                also be taken care of from here.
-                </p>
+                <p>Get an birds-eye view of who you're keeping track of. Any modifications that come to mind can also be taken care of from here.</p>
                 <p>
                     <asp:LinkButton
                         runat="server"
@@ -51,26 +43,14 @@
             </div>
         </asp:Panel>
 
-        <asp:Panel runat="server" Visible="false">
-            <div class="col-md-4">
-                <h2>Modify an employee's information</h2>
-                <p>
-                    Have someone in mind? Search your employee via their first or last name. From
-                there, you'll see information regarding their benefits cost. You can add or remove dependents for them,
-                or remove the employee from your records.
-                </p>
-                <p>
-                    <asp:LinkButton
-                        runat="server"
-                        CssClass="btn btn-default"
-                        OnClick="Click_ModifyEmployees">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>                   
-                    Modify
-                    </asp:LinkButton>
-                </p>
-            </div>
-        </asp:Panel>
-        <asp:ImageButton runat="server" class="center-block" ID="fruit" ImageUrl="Images/paylocity_fruit.png" OnClick="fruit_Click" />
+
+        <a onclick="document.location='https://www.paylocity.com/';return false;">
+            <asp:ImageButton
+                runat="server"
+                class="center-block"
+                ID="fruit"
+                ImageUrl="Images/paylocity_fruit.png" />
+        </a>
     </div>
 
 </asp:Content>

@@ -1,9 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CloserDetails.aspx.cs" Inherits="BenefitsCalculation.CloserDetails" %>
+﻿<%@ Page Title="Closer Details" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CloserDetails.aspx.cs" Inherits="BenefitsCalculation.CloserDetails" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="col-lg-12">
-
+    <div class="col-lg-12" style="padding-bottom:20px;">
         <asp:Panel runat="server" ID="CloserDetails_ForEmployee" CssClass="col-lg-3">
             <h2>Provider</h2>
             <div class="row">
@@ -49,6 +48,14 @@
                 <asp:Label runat="server">Paycheck After Deductions: </asp:Label>
                 <asp:Label runat="server" ID="LabelAfterDeductions"></asp:Label>
             </div>
+            <br/>
+            <div class="form-group">
+                <div class="row">
+                    <asp:Button ID="button_EditEmployee" runat="server" Text="Edit Employee" CssClass="btn" OnClick="button_EditEmployee_Click" />
+                    <asp:Button ID="button_DeleteEmployee" runat="server" Text="Delete Employee" CssClass="btn btn-danger" OnClick="button_DeleteEmployee_Click" />
+                    <asp:Button ID="button_AddDependent" runat="server" Text="Add Dependent" CssClass="btn btn-default" />
+                </div>
+            </div>
         </asp:Panel>
 
         <asp:Panel runat="server" ID="CloserDetails_ForDependent" CssClass="col-lg-6 col-lg-offset-1" Visible="false">
@@ -56,11 +63,12 @@
         </asp:Panel>
     </div>
 
-    <asp:Panel runat="server">
-            <asp:Panel runat="server">
-                <asp:Button ID="button_EditEmployee" runat="server" Text="Edit Employee" CssClass="btn" OnClick="button_EditEmployee_Click" />
-                <asp:Button ID="button_DeleteEmployee" runat="server" Text="Delete Employee" CssClass="btn btn-danger" OnClick="button_DeleteEmployee_Click" />
-            </asp:Panel>
+
+    <asp:Panel runat="server" Style="padding-top: 300px;">
+        <%--<asp:Button ID="button_EditEmployee" runat="server" Text="Edit Employee" CssClass="btn" OnClick="button_EditEmployee_Click" />
+        <asp:Button ID="button_DeleteEmployee" runat="server" Text="Delete Employee" CssClass="btn btn-danger" OnClick="button_DeleteEmployee_Click" />
+        <asp:Button ID="button_AddDependent" runat="server" Text="Add Dependent" CssClass="btn btn-default" />--%>
     </asp:Panel>
+
 
 </asp:Content>

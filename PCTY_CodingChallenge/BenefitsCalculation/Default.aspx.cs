@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace BenefitsCalculation
 {
@@ -27,11 +23,6 @@ namespace BenefitsCalculation
         protected void Click_AddEmployee(object sender, EventArgs e)
         {
             Response.Redirect("~/AddEmployee");
-        }
-
-        protected void fruit_Click(object sender, ImageClickEventArgs e)
-        {
-            Response.Redirect("https://www.paylocity.com/");
         }
     }
 }

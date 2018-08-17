@@ -103,15 +103,6 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.Label LabelAfterDeductions;
         
         /// <summary>
-        /// CloserDetails_ForDependent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel CloserDetails_ForDependent;
-        
-        /// <summary>
         /// button_EditEmployee control.
         /// </summary>
         /// <remarks>
@@ -128,5 +119,23 @@ namespace BenefitsCalculation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button button_DeleteEmployee;
+        
+        /// <summary>
+        /// button_AddDependent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button button_AddDependent;
+        
+        /// <summary>
+        /// CloserDetails_ForDependent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel CloserDetails_ForDependent;
     }
 }
