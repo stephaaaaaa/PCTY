@@ -12,6 +12,7 @@
                 CssClass="col-lg-2"> Employee First Name
             </asp:Label>
             <asp:TextBox runat="server" ID="TextBox_EmployeeFirstName" CssClass="form-control col-lg-1"></asp:TextBox>
+            <%--Validators--%>
             <asp:RequiredFieldValidator
                 runat="server"
                 ControlToValidate="TextBox_EmployeeFirstName"
@@ -25,6 +26,7 @@
                 ErrorMessage="Do not include symbols other than numerals, punctuation marks, or letters."
                 ValidationExpression="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
             </asp:RegularExpressionValidator>
+            <%--End validator--%>
         </div>
         <br />
         <div class="row">
@@ -33,6 +35,7 @@
                 CssClass="col-lg-2"> Employee Last Name
             </asp:Label>
             <asp:TextBox runat="server" ID="TextBox_EmployeeLastName" CssClass="form-control col-lg-1"></asp:TextBox>
+            <%--Validator--%>
             <asp:RequiredFieldValidator
                 runat="server"
                 ControlToValidate="TextBox_EmployeeLastName"
@@ -46,23 +49,16 @@
                 ForeColor="#db1a32"
                 ValidationExpression="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
             </asp:RegularExpressionValidator>
+            <%--End validator--%>
         </div>
         <br />
         <div class="row col-lg-6">
             <asp:Button
                 runat="server"
                 ID="Button_AddDependent"
-                CssClass="btn"
-                OnClick="Button_AddDependent_Click"
+                CssClass="btn btn-default"
+                OnClick="button_addNewDependent_Click"
                 Text="Add Dependents" />
-            <asp:Button
-                runat="server"
-                ID="Button_ContinueAddingDependents"
-                CssClass="btn"
-                OnClick="Button_ContinueAddingDependents_Click"
-                Visible="false"
-                CausesValidation="false"
-                Text="Continue adding dependents" />
             <asp:Button
                 runat="server"
                 ID="Button_SubmitEmployeeWithNoDependents"
@@ -73,53 +69,76 @@
     </asp:Panel>
     <br />
     <br />
+    <br />
+    <br />
+    <br />
+
 
     <asp:Panel runat="server" ID="Panel_AddDependents" Visible="false">
-        <div class="row col-lg-9">
-            <asp:Label
-                runat="server"
-                CssClass="row col-lg-3"
-                Text="Number of Dependents">
-            </asp:Label>
-            <asp:TextBox
-                runat="server"
-                ID="TextBoxNumberOfDependents"
-                CssClass="form-control">
-            </asp:TextBox>
-            <asp:RegularExpressionValidator
-                runat="server"
-                ControlToValidate="TextBoxNumberOfDependents"
-                ValidationExpression="^[1-9]\d*$"
-                ErrorMessage="*Number of dependents must be a whole number greater than 0."
-                ForeColor="#db1a32">
-            </asp:RegularExpressionValidator>
+
+        <%--Test--%>
+
+        <div class="form-group fieldGroup">
+            <div class="input-group">
+                <div class="">
+                    <input type="text" name="name[]" class="form-control" placeholder="Enter first name" />
+                </div>
+                <br />
+                <br />
+                <div class="">
+                    <input type="text" name="name[]" class="form-control" placeholder="Enter last name" />
+                </div>
+                <div class="input-group-addon">
+                    <a
+                        href="javascript:void(0)"
+                        class="btn btn-success addMore">
+                        <span
+                            class="glyphicon glyphicon glyphicon-plus"
+                            aria-hidden="true"></span>Add
+                    </a>
+                </div>
+            </div>
         </div>
-        <br />
-        <br />
-        <br />
-        <div>
+
+        <input type="submit" name="submit" class="btn btn-primary" value="SUBMIT" />
+
+        <div class="form-group fieldGroupCopy" style="display: none;">
+            <div class="input-group">
+                <input type="text" name="name[]" class="form-control" placeholder="Enter first name" />
+                <br/>
+                <br/>
+                <input type="text" name="name[]" class="form-control" placeholder="Enter last name" />
+                <div class="input-group-addon">
+                    <a href="javascript:void(0)" class="btn btn-danger remove"><span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>Remove</a>
+                </div>
+            </div>
+        </div>
+
+        <%--End test--%>
+
+        <div class="row">
+            <asp:Panel runat="server" ID="panel_newDependentFields">
+            </asp:Panel>
+        </div>
+        <div id="submissionButtons">
             <asp:Button runat="server"
-                ID="Button_GenerateDependentFields"
+                ID="button_addNewDependent"
                 CssClass=" btn"
-                OnClick="Button_GenerateDependentFields_Click"
-                Text="Generate dependent fields"></asp:Button>
+                OnClick="button_addNewDependent_Click"
+                Text="Add dependent"></asp:Button>
             <asp:Button runat="server"
                 ID="Button_CancelAddingDependents"
                 CssClass=" btn"
                 OnClick="Button_SubmitEmployeeWithNoDependents_Click"
                 Text="Submit without dependents"></asp:Button>
+            <asp:Button
+                runat="server"
+                CssClass="btn bottom "
+                Text="Submit"
+                ID="Button_SubmitWithDependents"
+                OnClick="Button_SubmitWithDependents_Click" />
         </div>
         <br />
-
-        <div class="row">
-            <asp:RequiredFieldValidator
-                runat="server"
-                ControlToValidate="TextBoxNumberOfDependents"
-                ErrorMessage="*Please enter a number of dependents."
-                ForeColor="#db1a32">
-            </asp:RequiredFieldValidator>
-
-        </div>
     </asp:Panel>
 
 
@@ -131,16 +150,40 @@
     <div class="row">
         <asp:Panel runat="server" ID="Panel_SubmitWithDependents" Visible="false">
             <div class="row col-lg-12">
-                <asp:Button
-                    runat="server"
-                    CssClass="btn bottom "
-                    Text="Submit"
-                    ID="Button_SubmitWithDependents"
-                    OnClick="Button_SubmitWithDependents_Click" />
             </div>
         </asp:Panel>
     </div>
 
+    <%--Scripts--%>
 
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap js library -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            //group add limit
+            var maxGroup = 10;
+
+            //add more fields group
+            $(".addMore").click(function () {
+                if ($('body').find('.fieldGroup').length < maxGroup) {
+                    var fieldHTML = '<div class="form-group fieldGroup">' + $(".fieldGroupCopy").html() + '</div>';
+                    $('body').find('.fieldGroup:last').after(fieldHTML);
+                } else {
+                    alert('Maximum ' + maxGroup + ' groups are allowed.');
+                }
+            });
+
+            //remove fields group
+            $("body").on("click", ".remove", function () {
+                $(this).parents(".fieldGroup").remove();
+            });
+        });
+    </script>
+
+    <%--End scripts--%>
 </asp:Content>
+
 

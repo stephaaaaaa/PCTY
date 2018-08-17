@@ -11,6 +11,7 @@ namespace BenefitsCalculation
     {
         private TextBox[] fName_TextBoxes;
         private TextBox[] lName_TextBoxes;
+        int dependentCount = 0;
         private Random generator;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -79,7 +80,7 @@ namespace BenefitsCalculation
 
         protected void Button_GenerateDependentFields_Click(object sender, EventArgs e)
         {
-            int numberOfDependents = int.Parse(TextBoxNumberOfDependents.Text);
+            int numberOfDependents = 0;// int.Parse(TextBoxNumberOfDependents.Text);
             RequiredFieldValidator namesFieldValidtor = new RequiredFieldValidator();
             namesFieldValidtor.ErrorMessage = "Please enter a name.";
             namesFieldValidtor.ForeColor.Equals("#db1a32");
@@ -210,11 +211,32 @@ namespace BenefitsCalculation
             Response.Redirect("~/ViewEmployees.aspx");
         }
 
-        protected void Button_ContinueAddingDependents_Click(object sender, EventArgs e)
+        protected void button_addNewDependent_Click(object sender, EventArgs e)
         {
-            Button_ContinueAddingDependents.Visible = false;
-            TextBoxNumberOfDependents.ReadOnly = false;
-            Button_GenerateDependentFields.Visible = true;
+            dependentCount++;
+            if (!Panel_AddDependents.Visible == true)
+                Panel_AddDependents.Visible = true;
+
+            Panel panel_newDependentPanel = new Panel();
+
+            Label newDependent_fName = new Label();
+            newDependent_fName.Text = $"Dependent first name:";
+            Label newDependent_lName = new Label();
+            newDependent_lName.Text = $"Dependent last name:";
+
+            TextBox newDependent_fNameText = new TextBox();
+            newDependent_fNameText.CssClass = "form-control";
+            TextBox newDependent_lNameText = new TextBox();
+            newDependent_lNameText.CssClass = "form-control";
+
+            //panel_newDependentFields.Attributes.Add("class", "row");
+            panel_newDependentPanel.Controls.Add(newDependent_fName);
+            panel_newDependentPanel.Controls.Add(newDependent_fNameText);
+
+            //panel_newDependentFields.Attributes.Add("class", "row");
+            panel_newDependentPanel.Controls.Add(newDependent_lName);
+            panel_newDependentPanel.Controls.Add(newDependent_lNameText);
+            panel_newDependentFields.Controls.Add(panel_newDependentPanel);
         }
     }
 }

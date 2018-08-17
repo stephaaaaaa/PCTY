@@ -49,15 +49,6 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.Button Button_AddDependent;
         
         /// <summary>
-        /// Button_ContinueAddingDependents control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_ContinueAddingDependents;
-        
-        /// <summary>
         /// Button_SubmitEmployeeWithNoDependents control.
         /// </summary>
         /// <remarks>
@@ -76,22 +67,22 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.Panel Panel_AddDependents;
         
         /// <summary>
-        /// TextBoxNumberOfDependents control.
+        /// panel_newDependentFields control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBoxNumberOfDependents;
+        protected global::System.Web.UI.WebControls.Panel panel_newDependentFields;
         
         /// <summary>
-        /// Button_GenerateDependentFields control.
+        /// button_addNewDependent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_GenerateDependentFields;
+        protected global::System.Web.UI.WebControls.Button button_addNewDependent;
         
         /// <summary>
         /// Button_CancelAddingDependents control.
@@ -101,6 +92,15 @@ namespace BenefitsCalculation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_CancelAddingDependents;
+        
+        /// <summary>
+        /// Button_SubmitWithDependents control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_SubmitWithDependents;
         
         /// <summary>
         /// Panel_DependentsFields control.
@@ -119,14 +119,5 @@ namespace BenefitsCalculation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel Panel_SubmitWithDependents;
-        
-        /// <summary>
-        /// Button_SubmitWithDependents control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_SubmitWithDependents;
     }
 }
