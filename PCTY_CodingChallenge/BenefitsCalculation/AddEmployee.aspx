@@ -80,19 +80,13 @@
                 <div>
                     <input id="dependentLastName" type="text" name="dep_lastname[]" class="form-control" placeholder="Enter dependent last name" />
                 </div>
-                <div style="padding-top:10px;">
-                    <a
-                        href="javascript:void(0)"
-                        class="btn btn-success addMore">
-                        <span
-                            class="glyphicon glyphicon glyphicon-plus"
-                            aria-hidden="true"></span>Add
-                    </a>
-                </div>
             </div>
         </div>
 
         <div style="padding-top: 20px">
+            <div style="padding-top: 10px; padding-bottom: 20px;">
+                <a href="javascript:void(0)" class="btn btn-success addMore"><span class="glyphicon glyphicon glyphicon-plus" aria-hidden="true"></span>Add Dependent</a>
+            </div>
             <asp:Button
                 runat="server"
                 ID="button_submitEmployeeWithDependent"
@@ -102,17 +96,16 @@
         </div>
 
         <div class="form-group fieldGroupCopy col-lg-12" style="display: none;">
-            <div style="padding-bottom:5px;">
+            <div style="padding-bottom: 5px;">
                 <input type="text" name="dep_firstname" class="form-control" placeholder="Enter dependent first name" />
             </div>
             <div>
                 <input type="text" name="dep_lastname" class="form-control" placeholder="Enter dependent last name" />
             </div>
-            <div style="padding-top: 10px;">
+            <div>
                 <a href="javascript:void(0)" class="btn btn-danger remove"><span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>Remove</a>
             </div>
         </div>
-       
     </asp:Panel>
 
 
