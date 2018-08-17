@@ -40,13 +40,13 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.TextBox TextBox_EmployeeLastName;
         
         /// <summary>
-        /// Button_AddDependent control.
+        /// Button_addDependents control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_AddDependent;
+        protected global::System.Web.UI.WebControls.Button Button_addDependents;
         
         /// <summary>
         /// Button_SubmitEmployeeWithNoDependents control.
@@ -67,57 +67,12 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.Panel Panel_AddDependents;
         
         /// <summary>
-        /// panel_newDependentFields control.
+        /// button_submitEmployeeWithDependent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panel_newDependentFields;
-        
-        /// <summary>
-        /// button_addNewDependent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button_addNewDependent;
-        
-        /// <summary>
-        /// Button_CancelAddingDependents control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_CancelAddingDependents;
-        
-        /// <summary>
-        /// Button_SubmitWithDependents control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button_SubmitWithDependents;
-        
-        /// <summary>
-        /// Panel_DependentsFields control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel_DependentsFields;
-        
-        /// <summary>
-        /// Panel_SubmitWithDependents control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel_SubmitWithDependents;
+        protected global::System.Web.UI.WebControls.Button button_submitEmployeeWithDependent;
     }
 }

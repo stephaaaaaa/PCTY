@@ -9,9 +9,6 @@ namespace BenefitsCalculation
 {
     public partial class AddEmployee : System.Web.UI.Page
     {
-        private TextBox[] fName_TextBoxes;
-        private TextBox[] lName_TextBoxes;
-        int dependentCount = 0;
         private Random generator;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -69,72 +66,6 @@ namespace BenefitsCalculation
         }
         #endregion
 
-
-        protected void Button_AddDependent_Click(object sender, EventArgs e)
-        {
-            Button_SubmitEmployeeWithNoDependents.Visible = false;
-            Button_AddDependent.Visible = false;
-
-            Panel_AddDependents.Visible = true;
-        }
-
-        protected void Button_GenerateDependentFields_Click(object sender, EventArgs e)
-        {
-            int numberOfDependents = 0;// int.Parse(TextBoxNumberOfDependents.Text);
-            RequiredFieldValidator namesFieldValidtor = new RequiredFieldValidator();
-            namesFieldValidtor.ErrorMessage = "Please enter a name.";
-            namesFieldValidtor.ForeColor.Equals("#db1a32");
-
-            Label[] fName_labels = new Label[numberOfDependents];
-            fName_TextBoxes = new TextBox[numberOfDependents];
-
-            Label[] lName_labels = new Label[numberOfDependents];
-            lName_TextBoxes = new TextBox[numberOfDependents];
-
-            RegularExpressionValidator namesRegExValidator = new RegularExpressionValidator();
-            namesRegExValidator.ErrorMessage = "Do not include symbols other than numerals, punctuation marks, or letters.";
-            namesRegExValidator.ForeColor.Equals("#db1a32");
-            namesRegExValidator.ValidationExpression = "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$";
-
-            for (int i = 0; i < numberOfDependents; i++)
-            {
-                fName_labels[i] = new Label();
-                fName_labels[i].CssClass = "row col-lg-2";
-                fName_labels[i].Text = $"Dependent {i + 1} first name";
-
-                fName_TextBoxes[i] = new TextBox();
-                fName_TextBoxes[i].EnableViewState = true;
-                fName_TextBoxes[i].CssClass = "form-control";
-                fName_TextBoxes[i].ID = $"dep_FirstName{i}";
-
-                lName_labels[i] = new Label();
-                lName_labels[i].CssClass = "row col-lg-2";
-                lName_labels[i].Text = $"Dependent {i + 1} last name";
-
-
-                lName_TextBoxes[i] = new TextBox();
-                lName_TextBoxes[i].EnableViewState = true;
-                lName_TextBoxes[i].CssClass = "form-control";
-                lName_TextBoxes[i].ID = $"dep_LastName{i}";
-            }
-
-            for (int i = 0; i < numberOfDependents; i++)
-            {
-                Panel_DependentsFields.Attributes.Add("class", "row");
-                Panel_DependentsFields.Controls.Add(fName_labels[i]);
-                Panel_DependentsFields.Controls.Add(fName_TextBoxes[i]); // first name text box
-                Panel_DependentsFields.Attributes.Add("class", "row");
-                Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
-                Panel_DependentsFields.Controls.Add(lName_labels[i]);
-                Panel_DependentsFields.Controls.Add(lName_TextBoxes[i]); // last name text box
-                Panel_DependentsFields.Attributes.Add("class", "row");
-                Panel_DependentsFields.Controls.Add(new LiteralControl("<br />"));
-            }
-            Panel_DependentsFields.CssClass = "row";
-            Panel_DependentsFields.Visible = true;
-            Panel_SubmitWithDependents.Visible = true;
-        }
-
         protected void Button_SubmitEmployeeWithNoDependents_Click(object sender, EventArgs e)
         {
             string fname = TextBox_EmployeeFirstName.Text;
@@ -149,7 +80,6 @@ namespace BenefitsCalculation
             }
             Response.Redirect("~/ViewEmployees.aspx");
         }
-
 
         protected void Button_SubmitWithDependents_Click(object sender, EventArgs e)
         {
@@ -211,32 +141,69 @@ namespace BenefitsCalculation
             Response.Redirect("~/ViewEmployees.aspx");
         }
 
-        protected void button_addNewDependent_Click(object sender, EventArgs e)
+        protected void button_addDependents_Click(object sender, EventArgs e)
         {
-            dependentCount++;
-            if (!Panel_AddDependents.Visible == true)
-                Panel_AddDependents.Visible = true;
+            Button_addDependents.Visible = false;
+            Button_SubmitEmployeeWithNoDependents.Text = "Submit with no dependents";
+            Panel_AddDependents.Visible = true;
+        }
 
-            Panel panel_newDependentPanel = new Panel();
+        protected void button_submitEmployeeWithDependent_Click(object sender, EventArgs e)
+        {
+            string emp_fName = TextBox_EmployeeFirstName.Text;
+            string emp_lName = TextBox_EmployeeLastName.Text;
+            Employee newEmployee = createStandardEmployeeWithDependents(emp_fName, emp_lName);
 
-            Label newDependent_fName = new Label();
-            newDependent_fName.Text = $"Dependent first name:";
-            Label newDependent_lName = new Label();
-            newDependent_lName.Text = $"Dependent last name:";
+            // add the new employee and generate their db id
+            using (var db = new BenefitsContext())
+            {
+                db.Employees.Add(newEmployee);
+                db.SaveChanges();
+            }
 
-            TextBox newDependent_fNameText = new TextBox();
-            newDependent_fNameText.CssClass = "form-control";
-            TextBox newDependent_lNameText = new TextBox();
-            newDependent_lNameText.CssClass = "form-control";
+            for (int i = 0; i < Request.Form.Count; i++)
+            {
+                if (Request.Form.AllKeys[i].Contains("dep_firstname"))
+                {
+                    Dependent newDependent = new Dependent();
+                    newDependent.employeeID = newEmployee.employeeID;
 
-            //panel_newDependentFields.Attributes.Add("class", "row");
-            panel_newDependentPanel.Controls.Add(newDependent_fName);
-            panel_newDependentPanel.Controls.Add(newDependent_fNameText);
+                    int dep_firstNameIndex = Request.Form.AllKeys[i].IndexOf("dep_firstname");
+                    int dep_firstNameLength = Request.Form.AllKeys[i].Length - dep_firstNameIndex;
+                    string[] dep_firstNameValue = Request.Form.AllKeys[i].Substring(dep_firstNameIndex, dep_firstNameLength).Split('$');
 
-            //panel_newDependentFields.Attributes.Add("class", "row");
-            panel_newDependentPanel.Controls.Add(newDependent_lName);
-            panel_newDependentPanel.Controls.Add(newDependent_lNameText);
-            panel_newDependentFields.Controls.Add(panel_newDependentPanel);
+                    if (dep_firstNameValue[0].Contains("dep_firstname"))
+                    {
+                        newDependent.firstName = Request.Form[i];
+                    }
+                    i++;
+                    if (Request.Form.AllKeys[i].Contains("dep_lastname"))
+                    {
+                        int dep_lastNameIndex = Request.Form.AllKeys[i].IndexOf("dep_lastname");
+                        int dep_lastNameLength = Request.Form.AllKeys[i].Length - dep_lastNameIndex;
+
+                        string[] dep_lastNameValue = Request.Form.AllKeys[i].Substring(dep_lastNameIndex, dep_lastNameLength).Split('$');
+
+                        if (dep_lastNameValue[0].Contains("dep_lastname"))
+                        {
+                            newDependent.lastName = Request.Form[i];
+                        }
+                    }
+
+                    newDependent.cost = 500;
+                    apply10PercentOffIfApplicable(newDependent);
+                    using (var db = new BenefitsContext())
+                    {
+                        Employee toUpdate = db.Employees.FirstOrDefault(p => p.employeeID == newEmployee.employeeID);
+                        toUpdate.cost += newDependent.cost;
+                        toUpdate.deductionsPerPaycheck = toUpdate.cost / 26;
+                        toUpdate.paycheckAfterDeductions = toUpdate.paycheckBeforeDeductions - toUpdate.deductionsPerPaycheck;
+
+                        db.Dependents.Add(newDependent);
+                        db.SaveChanges();
+                    }
+                }
+            }
         }
     }
 }

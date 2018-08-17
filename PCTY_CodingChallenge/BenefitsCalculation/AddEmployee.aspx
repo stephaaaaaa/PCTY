@@ -55,9 +55,9 @@
         <div class="row col-lg-6">
             <asp:Button
                 runat="server"
-                ID="Button_AddDependent"
+                ID="Button_addDependents"
                 CssClass="btn btn-default"
-                OnClick="button_addNewDependent_Click"
+                OnClick="button_addDependents_Click"
                 Text="Add Dependents" />
             <asp:Button
                 runat="server"
@@ -81,14 +81,14 @@
         <div class="form-group fieldGroup">
             <div class="input-group">
                 <div class="">
-                    <input type="text" name="name[]" class="form-control" placeholder="Enter first name" />
+                    <input id="dependentFirstName" type="text" name="dep_firstname[]" class="form-control" placeholder="Enter dependent first name" />
                 </div>
                 <br />
                 <br />
                 <div class="">
-                    <input type="text" name="name[]" class="form-control" placeholder="Enter last name" />
+                    <input id="dependentLastName" type="text" name="dep_lastname[]" class="form-control" placeholder="Enter dependent last name" />
                 </div>
-                <div class="input-group-addon">
+                <div class="input-group-btn">
                     <a
                         href="javascript:void(0)"
                         class="btn btn-success addMore">
@@ -100,15 +100,21 @@
             </div>
         </div>
 
-        <input type="submit" name="submit" class="btn btn-primary" value="SUBMIT" />
+        <asp:Button 
+            runat="server"
+            ID="button_submitEmployeeWithDependent"
+            Text="Submit"
+            CssClass="btn"
+            OnClick="button_submitEmployeeWithDependent_Click">
+        </asp:Button>
 
         <div class="form-group fieldGroupCopy" style="display: none;">
             <div class="input-group">
-                <input type="text" name="name[]" class="form-control" placeholder="Enter first name" />
+                <input type="text" name="dep_firstname" class="form-control" placeholder="Enter dependent first name" />
                 <br/>
                 <br/>
-                <input type="text" name="name[]" class="form-control" placeholder="Enter last name" />
-                <div class="input-group-addon">
+                <input type="text" name="dep_lastname" class="form-control" placeholder="Enter dependent last name" />
+                <div class="input-group-btn">
                     <a href="javascript:void(0)" class="btn btn-danger remove"><span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>Remove</a>
                 </div>
             </div>
@@ -116,43 +122,8 @@
 
         <%--End test--%>
 
-        <div class="row">
-            <asp:Panel runat="server" ID="panel_newDependentFields">
-            </asp:Panel>
-        </div>
-        <div id="submissionButtons">
-            <asp:Button runat="server"
-                ID="button_addNewDependent"
-                CssClass=" btn"
-                OnClick="button_addNewDependent_Click"
-                Text="Add dependent"></asp:Button>
-            <asp:Button runat="server"
-                ID="Button_CancelAddingDependents"
-                CssClass=" btn"
-                OnClick="Button_SubmitEmployeeWithNoDependents_Click"
-                Text="Submit without dependents"></asp:Button>
-            <asp:Button
-                runat="server"
-                CssClass="btn bottom "
-                Text="Submit"
-                ID="Button_SubmitWithDependents"
-                OnClick="Button_SubmitWithDependents_Click" />
-        </div>
-        <br />
     </asp:Panel>
 
-
-    <div class="row col-lg-12">
-        <asp:Panel runat="server" ID="Panel_DependentsFields" Visible="false">
-        </asp:Panel>
-    </div>
-
-    <div class="row">
-        <asp:Panel runat="server" ID="Panel_SubmitWithDependents" Visible="false">
-            <div class="row col-lg-12">
-            </div>
-        </asp:Panel>
-    </div>
 
     <%--Scripts--%>
 
@@ -163,8 +134,8 @@
 
     <script>
         $(document).ready(function () {
-            //group add limit
-            var maxGroup = 10;
+            // who has more than 30 kids these days?
+            var maxGroup = 30;
 
             //add more fields group
             $(".addMore").click(function () {
