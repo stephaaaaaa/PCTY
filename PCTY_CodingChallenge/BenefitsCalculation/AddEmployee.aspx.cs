@@ -161,49 +161,75 @@ namespace BenefitsCalculation
                 db.SaveChanges();
             }
 
+            bool passedFirstDependentField = false;
             for (int i = 0; i < Request.Form.Count; i++)
             {
+                Dependent newDependent = new Dependent();
+
                 if (Request.Form.AllKeys[i].Contains("dep_firstname"))
                 {
-                    Dependent newDependent = new Dependent();
-                    newDependent.employeeID = newEmployee.employeeID;
-
                     int dep_firstNameIndex = Request.Form.AllKeys[i].IndexOf("dep_firstname");
                     int dep_firstNameLength = Request.Form.AllKeys[i].Length - dep_firstNameIndex;
                     string[] dep_firstNameValue = Request.Form.AllKeys[i].Substring(dep_firstNameIndex, dep_firstNameLength).Split('$');
 
                     if (dep_firstNameValue[0].Contains("dep_firstname"))
                     {
-                        newDependent.firstName = Request.Form[i];
-                    }
-                    i++;
-                    if (Request.Form.AllKeys[i].Contains("dep_lastname"))
-                    {
-                        int dep_lastNameIndex = Request.Form.AllKeys[i].IndexOf("dep_lastname");
-                        int dep_lastNameLength = Request.Form.AllKeys[i].Length - dep_lastNameIndex;
-
-                        string[] dep_lastNameValue = Request.Form.AllKeys[i].Substring(dep_lastNameIndex, dep_lastNameLength).Split('$');
-
-                        if (dep_lastNameValue[0].Contains("dep_lastname"))
+                        if (passedFirstDependentField) // multiple dependents
                         {
-                            newDependent.lastName = Request.Form[i];
+                            string[] firstnames = Request.Form[i].Split(',');
+                            i++;
+                            string[] lastNames = Request.Form[i].Split(',');
+                            for (int extraDependentCount = 0; extraDependentCount < firstnames.Length; extraDependentCount++)
+                            {
+                                newDependent = new Dependent();
+                                newDependent.employeeID = newEmployee.employeeID;
+
+                                if (!firstnames[extraDependentCount].Equals("") && !lastNames[extraDependentCount].Equals(""))
+                                {
+                                    newDependent.firstName = firstnames[extraDependentCount];
+                                    newDependent.lastName = lastNames[extraDependentCount];
+                                    newDependent.cost = 500;
+                                    apply10PercentOffIfApplicable(newDependent);
+                                    using (var db = new BenefitsContext())
+                                    {
+                                        Employee toUpdate = db.Employees.FirstOrDefault(p => p.employeeID == newEmployee.employeeID);
+                                        toUpdate.cost += newDependent.cost;
+                                        toUpdate.deductionsPerPaycheck = toUpdate.cost / 26;
+                                        toUpdate.paycheckAfterDeductions = toUpdate.paycheckBeforeDeductions - toUpdate.deductionsPerPaycheck;
+
+                                        db.Dependents.Add(newDependent);
+                                        db.SaveChanges();
+                                    }
+                                }
+                            }
                         }
+                        newDependent = new Dependent();
+                        newDependent.employeeID = newEmployee.employeeID;
+
+                        newDependent.firstName = Request.Form[i];
+                        i++;
+                        newDependent.lastName = Request.Form[i];
+                        newDependent.cost = 500;
+                        apply10PercentOffIfApplicable(newDependent);
                     }
 
-                    newDependent.cost = 500;
-                    apply10PercentOffIfApplicable(newDependent);
-                    using (var db = new BenefitsContext())
+                    if (!passedFirstDependentField)
                     {
-                        Employee toUpdate = db.Employees.FirstOrDefault(p => p.employeeID == newEmployee.employeeID);
-                        toUpdate.cost += newDependent.cost;
-                        toUpdate.deductionsPerPaycheck = toUpdate.cost / 26;
-                        toUpdate.paycheckAfterDeductions = toUpdate.paycheckBeforeDeductions - toUpdate.deductionsPerPaycheck;
+                        using (var db = new BenefitsContext())
+                        {
+                            Employee toUpdate = db.Employees.FirstOrDefault(p => p.employeeID == newEmployee.employeeID);
+                            toUpdate.cost += newDependent.cost;
+                            toUpdate.deductionsPerPaycheck = toUpdate.cost / 26;
+                            toUpdate.paycheckAfterDeductions = toUpdate.paycheckBeforeDeductions - toUpdate.deductionsPerPaycheck;
 
-                        db.Dependents.Add(newDependent);
-                        db.SaveChanges();
+                            db.Dependents.Add(newDependent);
+                            db.SaveChanges();
+                        }
+                        passedFirstDependentField = true;
                     }
                 }
             }
+            Response.Redirect("ViewEmployees.aspx");
         }
     }
 }
