@@ -157,6 +157,7 @@
   <ItemGroup>
     <Content Include="About.aspx" />
     <Content Include="AddEmployee.aspx" />
+    <Content Include="AddMoreDependents.aspx" />
     <Content Include="CloserDetails.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -253,6 +254,13 @@
     </Compile>
     <Compile Include="AddEmployee.aspx.designer.cs">
       <DependentUpon>AddEmployee.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AddMoreDependents.aspx.cs">
+      <DependentUpon>AddMoreDependents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddMoreDependents.aspx.designer.cs">
+      <DependentUpon>AddMoreDependents.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">

@@ -53,7 +53,7 @@
                 <div class="row">
                     <asp:Button ID="button_EditEmployee" runat="server" Text="Edit Employee" CssClass="btn" OnClick="button_EditEmployee_Click" />
                     <asp:Button ID="button_DeleteEmployee" runat="server" Text="Delete Employee" CssClass="btn btn-danger" OnClick="button_DeleteEmployee_Click" />
-                    <asp:Button ID="button_AddDependent" runat="server" Text="Add Dependent" CssClass="btn btn-default" />
+                    <asp:Button ID="button_AddDependent" runat="server" Text="Add Dependent" CssClass="btn btn-default" OnClick="button_AddDependent_Click" />
                 </div>
             </div>
         </asp:Panel>

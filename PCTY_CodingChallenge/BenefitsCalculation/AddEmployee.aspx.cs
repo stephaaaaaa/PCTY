@@ -13,6 +13,8 @@ namespace BenefitsCalculation
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            Panel_AddSingleEmployee.Visible = true;
+            Panel_AddDependents.Visible = false;
             generator = new Random();
         }
 

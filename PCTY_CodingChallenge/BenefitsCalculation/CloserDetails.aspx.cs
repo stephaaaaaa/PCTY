@@ -253,5 +253,10 @@ namespace BenefitsCalculation
             Response.Redirect($"EditPerson.aspx?id=e_{dependentToEdit_ID}");
         }
 
+        protected void button_AddDependent_Click(object sender, EventArgs e)
+        {
+            Response.Redirect($"AddEmployee.aspx?id=e_{incomingEmployeeID}");
+
+        }
     }
 }
