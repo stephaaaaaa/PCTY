@@ -13,6 +13,15 @@ namespace BenefitsCalculation {
     public partial class AddEmployee {
         
         /// <summary>
+        /// panel_IncomingEmployeeInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel panel_IncomingEmployeeInfo;
+        
+        /// <summary>
         /// Panel_AddSingleEmployee control.
         /// </summary>
         /// <remarks>

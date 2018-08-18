@@ -4,9 +4,10 @@
     <div class="jumbotron custom-jumbo">
         <h1>Add People</h1>
         <h3>Add employees and/or their dependents</h3>
+        <asp:Panel runat="server" ID="panel_IncomingEmployeeInfo"> </asp:Panel>
     </div>
 
-    <div style="padding-bottom: 70px;">
+    <div style="padding-bottom: 30px;">
         <asp:Panel runat="server" ID="Panel_AddSingleEmployee" Visible="false">
             <div class="row">
                 <asp:Label
@@ -72,7 +73,7 @@
     </div>
 
     <asp:Panel runat="server" ID="Panel_AddDependents" Visible="true">
-        <div class="form-group fieldGroup">
+        <div class="form-group fieldGroup" style="padding-top:20px;">
             <div class="">
                 <div class="" style="padding-bottom: 5px;">
                     <input id="dependentFirstName" type="text" name="dep_firstname[]" class="form-control" placeholder="Enter dependent first name" />
@@ -90,7 +91,7 @@
             <asp:Button
                 runat="server"
                 ID="button_submitEmployeeWithDependent"
-                Text="Submit With Dependents"
+                Text="Submit"
                 CssClass="btn"
                 OnClick="button_submitEmployeeWithDependent_Click"></asp:Button>
         </div>

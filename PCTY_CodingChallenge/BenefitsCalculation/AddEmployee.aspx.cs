@@ -10,11 +10,42 @@ namespace BenefitsCalculation
     public partial class AddEmployee : System.Web.UI.Page
     {
         private Random generator;
+        Employee empToAddDependents;
+        private int incomingEmployeeID = 0;
+        private bool addingDependentsFromEmployee = false;
+
+        private void getURL()
+        {
+            string url = HttpContext.Current.Request.Url.AbsoluteUri;
+            if (url.Contains("id="))
+            {
+                string[] urlPortion = url.Split('=');
+                string[] idPortion = urlPortion[1].Split('_');
+                incomingEmployeeID = int.Parse(idPortion[1]);
+            }
+        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Panel_AddSingleEmployee.Visible = true;
-            Panel_AddDependents.Visible = false;
+            getURL();
+            if (incomingEmployeeID != 0)
+            {
+                Panel_AddSingleEmployee.Visible = false;
+                Panel_AddDependents.Visible = true;
+                addingDependentsFromEmployee = true;
+                Label employeeName = new Label();
+                using (var db = new BenefitsContext())
+                {
+                    empToAddDependents = db.Employees.FirstOrDefault(p => p.employeeID == incomingEmployeeID);
+                }
+                employeeName.Text = $"Adding dependents to: {empToAddDependents.firstName} {empToAddDependents.lastName}";
+                panel_IncomingEmployeeInfo.Controls.Add(employeeName);
+            }
+            else
+            {
+                Panel_AddSingleEmployee.Visible = true;
+                Panel_AddDependents.Visible = false;
+            }
             generator = new Random();
         }
 
@@ -67,6 +98,21 @@ namespace BenefitsCalculation
             return newEmployee;
         }
         #endregion
+
+        private Dependent createInitialDependent(int employeeID, string firstName, string lastName)
+        {
+            Dependent newDependent = new Dependent();
+
+            newDependent.firstName = firstName;
+            newDependent.lastName = lastName;
+            newDependent.cost = 500;
+            apply10PercentOffIfApplicable(newDependent);
+
+            return newDependent;
+        }
+
+
+        #region Button functionality
 
         protected void Button_SubmitEmployeeWithNoDependents_Click(object sender, EventArgs e)
         {
@@ -150,20 +196,40 @@ namespace BenefitsCalculation
             Panel_AddDependents.Visible = true;
         }
 
+        bool passedFirstDependentField = false;
+
         protected void button_submitEmployeeWithDependent_Click(object sender, EventArgs e)
         {
-            string emp_fName = TextBox_EmployeeFirstName.Text;
-            string emp_lName = TextBox_EmployeeLastName.Text;
-            Employee newEmployee = createStandardEmployeeWithDependents(emp_fName, emp_lName);
-
-            // add the new employee and generate their db id
-            using (var db = new BenefitsContext())
+            if (incomingEmployeeID == 0)
             {
-                db.Employees.Add(newEmployee);
-                db.SaveChanges();
-            }
+                string emp_fName = TextBox_EmployeeFirstName.Text;
+                string emp_lName = TextBox_EmployeeLastName.Text;
+                Employee newEmployee = createStandardEmployeeWithDependents(emp_fName, emp_lName);
 
-            bool passedFirstDependentField = false;
+                // add the new employee and generate their db id
+                using (var db = new BenefitsContext())
+                {
+                    db.Employees.Add(newEmployee);
+                    db.SaveChanges();
+                }
+                createDependentsFromFields(newEmployee);
+                Response.Redirect("ViewEmployees.aspx");
+            }
+            else // if the employee exists and is getting added dependents
+            {
+                using (var db = new BenefitsContext())
+                {
+                    Employee toUpdate = db.Employees.FirstOrDefault(p => p.employeeID == incomingEmployeeID);
+                    if (toUpdate.hasDependent == false)
+                        toUpdate.hasDependent = true;
+                    createDependentsFromFields(toUpdate);
+                }
+                Response.Redirect($"CloserDetails?id={incomingEmployeeID}");
+            }
+        }
+        #endregion
+        private void createDependentsFromFields(Employee newEmployee)
+        {
             for (int i = 0; i < Request.Form.Count; i++)
             {
                 Dependent newDependent = new Dependent();
@@ -179,6 +245,7 @@ namespace BenefitsCalculation
                         if (passedFirstDependentField) // multiple dependents
                         {
                             string[] firstnames = Request.Form[i].Split(',');
+                            if (firstnames[0].Equals("")) break;
                             i++;
                             string[] lastNames = Request.Form[i].Split(',');
                             for (int extraDependentCount = 0; extraDependentCount < firstnames.Length; extraDependentCount++)
@@ -205,25 +272,31 @@ namespace BenefitsCalculation
                                 }
                             }
                         }
-                        newDependent = new Dependent();
-                        newDependent.employeeID = newEmployee.employeeID;
-
-                        newDependent.firstName = Request.Form[i];
+                        string firstName = Request.Form[i];
                         i++;
-                        newDependent.lastName = Request.Form[i];
-                        newDependent.cost = 500;
-                        apply10PercentOffIfApplicable(newDependent);
+                        string lastName = Request.Form[i];
+                        newDependent = createInitialDependent(newEmployee.employeeID, firstName, lastName);
+                        newDependent.employeeID = incomingEmployeeID;
                     }
 
                     if (!passedFirstDependentField)
                     {
                         using (var db = new BenefitsContext())
                         {
-                            Employee toUpdate = db.Employees.FirstOrDefault(p => p.employeeID == newEmployee.employeeID);
-                            toUpdate.cost += newDependent.cost;
-                            toUpdate.deductionsPerPaycheck = toUpdate.cost / 26;
-                            toUpdate.paycheckAfterDeductions = toUpdate.paycheckBeforeDeductions - toUpdate.deductionsPerPaycheck;
-
+                            if (!addingDependentsFromEmployee)
+                            {
+                                Employee toUpdate = db.Employees.FirstOrDefault(p => p.employeeID == newEmployee.employeeID);
+                                toUpdate.cost += newDependent.cost;
+                                toUpdate.deductionsPerPaycheck = toUpdate.cost / 26;
+                                toUpdate.paycheckAfterDeductions = toUpdate.paycheckBeforeDeductions - toUpdate.deductionsPerPaycheck;
+                            }
+                            else
+                            {
+                                Employee toUpdate = db.Employees.FirstOrDefault(p => p.employeeID == incomingEmployeeID);
+                                toUpdate.cost += newDependent.cost;
+                                toUpdate.deductionsPerPaycheck = toUpdate.cost / 26;
+                                toUpdate.paycheckAfterDeductions = toUpdate.paycheckBeforeDeductions - toUpdate.deductionsPerPaycheck;
+                            }
                             db.Dependents.Add(newDependent);
                             db.SaveChanges();
                         }
@@ -231,7 +304,6 @@ namespace BenefitsCalculation
                     }
                 }
             }
-            Response.Redirect("ViewEmployees.aspx");
         }
     }
 }
