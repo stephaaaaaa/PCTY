@@ -191,6 +191,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Content\roboto-slab-v7-latin-regular.woff" />
+    <Content Include="Images\flower_resized.jpg" />
     <Content Include="Images\paylocity_fruit.png" />
     <Content Include="PCTYBenefitsData_DataSet.xsc">
       <DependentUpon>PCTYBenefitsData_DataSet.xsd</DependentUpon>

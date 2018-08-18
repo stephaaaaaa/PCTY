@@ -276,7 +276,10 @@ namespace BenefitsCalculation
                         i++;
                         string lastName = Request.Form[i];
                         newDependent = createInitialDependent(newEmployee.employeeID, firstName, lastName);
-                        newDependent.employeeID = incomingEmployeeID;
+                        if (addingDependentsFromEmployee)
+                            newDependent.employeeID = incomingEmployeeID;
+                        else
+                            newDependent.employeeID = newEmployee.employeeID;
                     }
 
                     if (!passedFirstDependentField)
