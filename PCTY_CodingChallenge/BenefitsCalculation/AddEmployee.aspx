@@ -4,7 +4,7 @@
     <div class="jumbotron custom-jumbo">
         <h1>Add People</h1>
         <h3>Add employees and/or their dependents</h3>
-        <asp:Panel runat="server" ID="panel_IncomingEmployeeInfo"> </asp:Panel>
+        <asp:Panel runat="server" ID="panel_IncomingEmployeeInfo"></asp:Panel>
     </div>
 
     <div style="padding-bottom: 30px;">
@@ -73,13 +73,16 @@
     </div>
 
     <asp:Panel runat="server" ID="Panel_AddDependents" Visible="true">
-        <div class="form-group fieldGroup" style="padding-top:20px;">
+        <div class="form-group fieldGroup" style="padding-top: 20px;">
             <div class="">
                 <div class="" style="padding-bottom: 5px;">
-                    <input id="dependentFirstName" type="text" name="dep_firstname[]" class="form-control" placeholder="Enter dependent first name" />
+                    <input id="dependentFirstName" title="Dependent first name" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" 
+                        required type="text" name="dep_firstname[]" class="form-control" placeholder="Enter dependent first name" />
+
                 </div>
                 <div>
-                    <input id="dependentLastName" type="text" name="dep_lastname[]" class="form-control" placeholder="Enter dependent last name" />
+                    <input id="dependentLastName" title="Dependent last name" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" 
+                        required type="text" name="dep_lastname[]" class="form-control" placeholder="Enter dependent last name" />
                 </div>
             </div>
         </div>
