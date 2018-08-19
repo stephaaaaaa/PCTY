@@ -191,7 +191,7 @@ namespace BenefitsCalculation
                 }
             }
         }
-#endregion
+        #endregion
 
         #region Button functionality
 
@@ -272,6 +272,7 @@ namespace BenefitsCalculation
 
         protected void button_addDependents_Click(object sender, EventArgs e)
         {
+            button_cancel.Visible = false;
             Button_addDependents.Visible = false;
             Button_SubmitEmployeeWithNoDependents.Text = "Submit with no dependents";
             Panel_AddDependents.Visible = true;
@@ -309,6 +310,11 @@ namespace BenefitsCalculation
             }
         }
         #endregion
-        
+
+        protected void button_cancel_Click(object sender, EventArgs e)
+        {
+            if (!addingDependentsFromEmployee)
+                Response.Redirect("Default.aspx");
+        }
     }
 }

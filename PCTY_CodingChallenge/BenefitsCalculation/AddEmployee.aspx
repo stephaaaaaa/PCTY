@@ -68,6 +68,13 @@
                     CssClass="btn"
                     OnClick="Button_SubmitEmployeeWithNoDependents_Click"
                     Text="Submit" />
+                <asp:Button
+                    runat="server"
+                    ID="button_cancel"
+                    CssClass="btn"
+                    OnClick="button_cancel_Click"
+                    Text="Cancel"
+                    CausesValidation="false" />
             </div>
         </asp:Panel>
     </div>
@@ -76,13 +83,17 @@
         <div class="form-group fieldGroup" style="padding-top: 20px;">
             <div class="">
                 <div class="" style="padding-bottom: 5px;">
-                    <input id="dependentFirstName" title="Dependent first name" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" 
-                        required type="text" name="dep_firstname[]" class="form-control" placeholder="Enter dependent first name" />
+                    <asp:label runat="server">Dependent First Name:</asp:label>
+                    <asp:textbox runat="server" id="dep_firstname" cssclass="form-control"></asp:textbox>
+                    <%--<input id="dependentFirstName" title="Dependent first name" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"
+                        required type="text" name="dep_firstname[]" class="form-control" placeholder="Enter dependent first name" />--%>
 
                 </div>
                 <div>
-                    <input id="dependentLastName" title="Dependent last name" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+" 
-                        required type="text" name="dep_lastname[]" class="form-control" placeholder="Enter dependent last name" />
+                    <asp:Label runat="server">Dependent Last Name:</asp:Label>
+                    <asp:TextBox runat="server" ID="dep_lastname" CssClass="form-control"></asp:TextBox>
+                    <%--<input id="dependentLastName" title="Dependent last name" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+"
+                        required type="text" name="dep_lastname[]" class="form-control" placeholder="Enter dependent last name" />--%>
                 </div>
             </div>
         </div>
@@ -101,10 +112,14 @@
 
         <div class="form-group fieldGroupCopy col-lg-12" style="display: none;">
             <div style="padding-bottom: 5px;">
-                <input type="text" name="dep_firstname" class="form-control" placeholder="Enter dependent first name" />
+                <asp:Label runat="server">Dependent First Name:</asp:Label>
+                <asp:TextBox runat="server" ID="dep_firstname1" CssClass="form-control"></asp:TextBox>
+                <%--<input type="text" name="dep_firstname" class="form-control" placeholder="Enter dependent first name" />--%>
             </div>
             <div>
-                <input type="text" name="dep_lastname" class="form-control" placeholder="Enter dependent last name" />
+                <asp:Label runat="server">Dependent Last Name:</asp:Label>
+                <asp:TextBox runat="server" ID="dep_lastname1" CssClass="form-control"></asp:TextBox>
+                <%--<input type="text" name="dep_lastname" class="form-control" placeholder="Enter dependent last name" />--%>
             </div>
             <div>
                 <a href="javascript:void(0)" class="btn btn-danger remove"><span class="glyphicon glyphicon glyphicon-remove" aria-hidden="true"></span>Remove</a>

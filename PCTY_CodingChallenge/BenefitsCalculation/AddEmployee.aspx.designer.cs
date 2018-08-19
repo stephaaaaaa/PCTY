@@ -67,6 +67,15 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.Button Button_SubmitEmployeeWithNoDependents;
         
         /// <summary>
+        /// button_cancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button button_cancel;
+        
+        /// <summary>
         /// Panel_AddDependents control.
         /// </summary>
         /// <remarks>
@@ -76,6 +85,24 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.Panel Panel_AddDependents;
         
         /// <summary>
+        /// dep_firstname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox dep_firstname;
+        
+        /// <summary>
+        /// dep_lastname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox dep_lastname;
+        
+        /// <summary>
         /// button_submitEmployeeWithDependent control.
         /// </summary>
         /// <remarks>
@@ -83,5 +110,23 @@ namespace BenefitsCalculation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button button_submitEmployeeWithDependent;
+        
+        /// <summary>
+        /// dep_firstname1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox dep_firstname1;
+        
+        /// <summary>
+        /// dep_lastname1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox dep_lastname1;
     }
 }
