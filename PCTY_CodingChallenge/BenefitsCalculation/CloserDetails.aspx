@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="col-lg-12" style="padding-bottom:20px;">
+    <div class="col-lg-12" style="padding-bottom: 20px;">
         <asp:Panel runat="server" ID="CloserDetails_ForEmployee" CssClass="col-lg-3">
             <h2>Provider</h2>
             <div class="row">
@@ -48,13 +48,15 @@
                 <asp:Label runat="server">Paycheck After Deductions: </asp:Label>
                 <asp:Label runat="server" ID="LabelAfterDeductions"></asp:Label>
             </div>
-            <br/>
-            <div class="form-group">
+            <br />
+            <div style="padding-top: 10px;">
                 <div class="row">
                     <asp:Button ID="button_EditEmployee" runat="server" Text="Edit Employee" CssClass="btn" OnClick="button_EditEmployee_Click" />
                     <asp:Button ID="button_DeleteEmployee" runat="server" Text="Delete Employee" CssClass="btn btn-danger" OnClick="button_DeleteEmployee_Click" />
-                    <asp:Button ID="button_AddDependent" runat="server" Text="Add Dependent" CssClass="btn btn-default" OnClick="button_AddDependent_Click" />
                 </div>
+            <div style="padding-left: 40px; padding-top:5px;">
+                <asp:Button ID="button_AddDependent" runat="server" Text="Add Dependent" CssClass="btn btn-default" OnClick="button_AddDependent_Click" />
+            </div>
             </div>
         </asp:Panel>
 
