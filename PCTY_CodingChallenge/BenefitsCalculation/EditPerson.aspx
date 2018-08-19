@@ -54,7 +54,7 @@
             <br />
             <div class="row col-lg-6">
                 <asp:Button runat="server" Text="Submit Changes" ID="button_SubmitChanges" CssClass="btn btn-default" OnClick="button_SubmitChanges_Click"></asp:Button>
-                <asp:Button runat="server" Text="Cancel Changes" ID="button_CancelChanges" CssClass="btn btn-default" OnClick="button_CancelChanges_Click"></asp:Button>
+                <asp:Button runat="server" Text="Cancel Changes" ID="button_CancelChanges" CssClass="btn btn-default" CausesValidation="false" OnClick="button_CancelChanges_Click"></asp:Button>
             </div>
         </asp:Panel>
     </asp:Panel>
