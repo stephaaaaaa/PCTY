@@ -12,7 +12,7 @@
 
     <div class="row">
         <asp:Panel runat="server" ID="AddEmployee" CssClass="center-block">
-            <div class="col-md-4">
+            <div class="col-md-5" style="padding-left:200px;">
                 <h2>Add an employee</h2>
                 <p>Add your employee's information, along with information about any dependents.</p>
                 <p>
@@ -28,9 +28,9 @@
         </asp:Panel>
 
         <asp:Panel ID="ViewEmployees" runat="server" CssClass="center-block">
-            <div class="col-md-4">
-                <h2>View employees</h2>
-                <p>Get an birds-eye view of who you're keeping track of. Any modifications that come to mind can also be taken care of from here.</p>
+            <div class="col-md-5 pull-right" style="padding-right:200px">
+                <h2>View all employees</h2>
+                <p>Get a birds-eye view of who you're keeping track of. Any modifications that come to mind can also be taken care of from here.</p>
                 <p>
                     <asp:LinkButton
                         runat="server"
@@ -44,13 +44,13 @@
         </asp:Panel>
 
 
-        <a onclick="document.location='https://www.paylocity.com/';return false;">
+<%--        <a onclick="document.location='https://www.paylocity.com/';return false;">
             <asp:ImageButton
                 runat="server"
                 class="center-block"
                 ID="fruit"
                 ImageUrl="Images/paylocity_fruit.png" />
-        </a>
+        </a>--%>
     </div>
 
 </asp:Content>

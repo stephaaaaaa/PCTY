@@ -206,12 +206,9 @@
     </Content>
     <None Include="Properties\PublishProfiles\paylocitybenefitscalculator - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="Images\mac.png" />
     <Content Include="Images\orange-gradient-linear-white-1920x1080-c2-ff8c00-ffffff-a-315-f-14.png" />
     <Content Include="Images\orange-gradient.png" />
-    <Content Include="Images\pcty_benefitscalculator_white.png" />
     <Content Include="Images\pcty_challengeLogo_webSize.png" />
-    <Content Include="Images\redOrangeGradient.jpg" />
     <Content Include="pcty_favicon.ico" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
