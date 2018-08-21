@@ -258,5 +258,10 @@ namespace BenefitsCalculation
             Response.Redirect($"AddEmployee.aspx?id=e_{incomingEmployeeID}");
 
         }
+
+        protected void button_CancelView_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("ViewEmployees");
+        }
     }
 }

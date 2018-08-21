@@ -130,6 +130,15 @@ namespace BenefitsCalculation {
         protected global::System.Web.UI.WebControls.Button button_AddDependent;
         
         /// <summary>
+        /// button_CancelView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button button_CancelView;
+        
+        /// <summary>
         /// CloserDetails_ForDependent control.
         /// </summary>
         /// <remarks>

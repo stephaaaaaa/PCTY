@@ -54,8 +54,9 @@
                     <asp:Button ID="button_EditEmployee" runat="server" Text="Edit Employee" CssClass="btn" OnClick="button_EditEmployee_Click" />
                     <asp:Button ID="button_DeleteEmployee" runat="server" Text="Delete Employee" CssClass="btn btn-danger" OnClick="button_DeleteEmployee_Click" />
                 </div>
-            <div style="padding-left: 40px; padding-top:5px;">
+            <div style="padding-top:5px;">
                 <asp:Button ID="button_AddDependent" runat="server" Text="Add Dependent" CssClass="btn btn-default" OnClick="button_AddDependent_Click" />
+                <asp:Button ID="button_CancelView" runat="server" Text="Cancel" CssClass="btn btn-default" OnClick="button_CancelView_Click"/>
             </div>
             </div>
         </asp:Panel>
