@@ -103,6 +103,8 @@ namespace BenefitsCalculation
 
         #endregion
 
+        // generates the table of dependents, along with the provider's overview 
+        // information
         protected void Page_Load(object sender, EventArgs e)
         {
             getIncomingEmployeeID();
@@ -154,6 +156,15 @@ namespace BenefitsCalculation
             initializeProviderLabels(costAccruedByDependents);
         }
 
+        #region Button functionality
+
+        /// <summary>
+        /// Gets the ID of the dependent to delete via the form's viewstate, as the
+        /// delete button's ID is generated also with the dependent's ID. From there,
+        /// the employee's cost is updated, along with their other resulting totals.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_DeleteDependent_Click(object sender, EventArgs e)
         {
             string[] buttonIDComponents = new string[0];
@@ -191,9 +202,17 @@ namespace BenefitsCalculation
                 db.Dependents.Remove(toDelete);
                 db.SaveChanges();
             }
+            // reload the page
             Response.Redirect(HttpContext.Current.Request.Url.AbsoluteUri);
         }
 
+        /// <summary>
+        /// Gets the employee's ID from the edit button's viewstate, as the buttons' IDs are
+        /// generated with a respective dependent ID. From there, the user is redirected to
+        /// an edit dependent page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_EditDependent_Click(object sender, EventArgs e)
         {
             string[] buttonIDComponents = new string[0];
@@ -210,6 +229,13 @@ namespace BenefitsCalculation
             Response.Redirect($"EditPerson.aspx?id=d_{dependentToEdit_ID}");
         }
 
+        /// <summary>
+        /// Deletes the employee by getting the employee number from the view state.
+        /// This is achieved because the delete buttons come paired with IDs to match their
+        /// corresponsing people.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void button_DeleteEmployee_Click(object sender, EventArgs e)
         {
             string[] buttonIDComponents = new string[0];
@@ -220,7 +246,7 @@ namespace BenefitsCalculation
                 {
                     string buttonNumber = Request.Form.AllKeys[i];
                     buttonIDComponents = buttonNumber.Split('_');
-                    employeeToDelete_ID = int.Parse(buttonIDComponents[1]);
+                    employeeToDelete_ID = int.Parse(buttonIDComponents[1]); // get the employee to delete from their ID number
                 }
             }
             using (var db = new BenefitsContext())
@@ -237,6 +263,12 @@ namespace BenefitsCalculation
             Response.Redirect($"ViewEmployees");
         }
 
+        /// <summary>
+        /// Redirects to the edit employee page, via redirecting to the base URL and then
+        /// passing in the employee ID.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void button_EditEmployee_Click(object sender, EventArgs e)
         {
             string[] buttonIDComponents = new string[0];
@@ -253,15 +285,28 @@ namespace BenefitsCalculation
             Response.Redirect($"EditPerson.aspx?id=e_{dependentToEdit_ID}");
         }
 
+        /// <summary>
+        /// Redirects to the add people page, so that dependents may be added.
+        /// The employee ID is passed for this functionality to work.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void button_AddDependent_Click(object sender, EventArgs e)
         {
             Response.Redirect($"AddEmployee.aspx?id=e_{incomingEmployeeID}");
 
         }
 
+        /// <summary>
+        /// Goes back to the view employees page, if the user decides they've had enough of looking at a particular person.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void button_CancelView_Click(object sender, EventArgs e)
         {
             Response.Redirect("ViewEmployees");
         }
+
+        #endregion
     }
 }
