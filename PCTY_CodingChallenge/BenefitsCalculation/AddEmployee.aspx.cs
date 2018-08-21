@@ -309,12 +309,14 @@ namespace BenefitsCalculation
                 Response.Redirect($"CloserDetails?id={incomingEmployeeID}");
             }
         }
-        #endregion
-
         protected void button_cancel_Click(object sender, EventArgs e)
         {
             if (!addingDependentsFromEmployee)
                 Response.Redirect("Default.aspx");
+            else
+                Response.Redirect($"CloserDetails?id={incomingEmployeeID}");
         }
+        #endregion
+
     }
 }
