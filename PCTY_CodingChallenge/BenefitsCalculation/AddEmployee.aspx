@@ -20,12 +20,14 @@
                     runat="server"
                     ControlToValidate="TextBox_EmployeeFirstName"
                     ForeColor="#db1a32"
+                    ValidationGroup="val_submitNoDependents"
                     ErrorMessage="*Please enter a first name.">
                 </asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator
                     runat="server"
                     ControlToValidate="TextBox_EmployeeFirstName"
                     ForeColor="#db1a32"
+                    ValidationGroup="val_submitNoDependents"
                     ErrorMessage="Do not include symbols other than numerals, punctuation marks, or letters."
                     ValidationExpression="^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$">
                 </asp:RegularExpressionValidator>
@@ -42,11 +44,13 @@
                 <asp:RequiredFieldValidator
                     runat="server"
                     ControlToValidate="TextBox_EmployeeLastName"
+                    ValidationGroup="val_submitNoDependents"
                     ForeColor="#db1a32"
                     ErrorMessage="*Please enter a last name.">
                 </asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator
                     runat="server"
+                    ValidationGroup="val_submitNoDependents"
                     ControlToValidate="TextBox_EmployeeLastName"
                     ErrorMessage="Do not include symbols other than numerals, punctuation marks, or letters."
                     ForeColor="#db1a32"
@@ -67,6 +71,7 @@
                     ID="Button_SubmitEmployeeWithNoDependents"
                     CssClass="btn"
                     OnClick="Button_SubmitEmployeeWithNoDependents_Click"
+                    ValidationGroup="val_submitNoDependents"
                     Text="Submit" />
                 <asp:Button
                     runat="server"

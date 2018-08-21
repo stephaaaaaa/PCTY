@@ -11,6 +11,7 @@ namespace BenefitsCalculation
         Employee empToAddDependents;
         private int incomingEmployeeID = 0;
         private bool addingDependentsFromEmployee = false;
+        private bool passedFirstDependentField = false;
 
         private void getIncomingEmployeeID()
         {
@@ -200,6 +201,7 @@ namespace BenefitsCalculation
             string fname = TextBox_EmployeeFirstName.Text;
             string lname = TextBox_EmployeeLastName.Text;
 
+
             Employee newEmployee = createStandardEmployeeNoDependents(fname, lname);
 
             using (var db = new BenefitsContext())
@@ -266,7 +268,6 @@ namespace BenefitsCalculation
                     }
                 }
             }
-
             Response.Redirect("~/ViewEmployees.aspx");
         }
 
@@ -277,8 +278,6 @@ namespace BenefitsCalculation
             Button_SubmitEmployeeWithNoDependents.Text = "Submit with no dependents";
             Panel_AddDependents.Visible = true;
         }
-
-        bool passedFirstDependentField = false;
 
         /// <summary>
         /// Submits a brand new employee with dependents, or adds a dependent to an existing
@@ -331,6 +330,7 @@ namespace BenefitsCalculation
             else
                 Response.Redirect($"CloserDetails?id={incomingEmployeeID}");
         }
+
         #endregion
 
     }
