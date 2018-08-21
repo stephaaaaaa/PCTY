@@ -1,6 +1,5 @@
 # PCTY Coding Challenge
-Home of the coding challenge, 2018
-By Stephanie Labastida: August 21, 2018
+Stephanie Labastida: August 21, 2018
 
 ## Description
 This project provides a solution to the PCTY coding challenge, wherein the developer has to design a solution for
