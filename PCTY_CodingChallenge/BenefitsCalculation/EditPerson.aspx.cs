@@ -6,13 +6,16 @@ namespace BenefitsCalculation
 {
     public partial class EditPerson : System.Web.UI.Page
     {
+        #region globals
         int incomingPersonID;
         Employee empToEdit;
         Dependent depToEdit;
         bool isEmployee;
         bool isDependent;
+        #endregion
 
         #region Helper methods
+
         /// <summary>
         /// Method to get the classification of a person (dependent or employee)
         /// based on the URL. Also gets the person's respective ID.
@@ -34,7 +37,7 @@ namespace BenefitsCalculation
 
         /// <summary>
         /// Method for displaying the correct options, depending on if 
-        /// the person being edited is a dependent or employee
+        /// the person being edited is a dependent or employee.
         /// </summary>
         private void loadCorrectPanel()
         {
@@ -168,6 +171,7 @@ namespace BenefitsCalculation
                 toSubmit.paycheckAfterDeductions = toSubmit.paycheckBeforeDeductions - toSubmit.deductionsPerPaycheck;
             }
         }
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -211,6 +215,12 @@ namespace BenefitsCalculation
 
         }
 
+        /// <summary>
+        /// Submits and applies appropriate changes whether the person being edited is an
+        /// employee or dependent.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void button_SubmitChanges_Click(object sender, EventArgs e)
         {
             var db = new BenefitsContext();
@@ -238,6 +248,7 @@ namespace BenefitsCalculation
                 Response.Redirect($"CloserDetails?id={toSubmit.employeeID}");
             }
         }
+
         #endregion
     }
 }
