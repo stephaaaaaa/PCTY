@@ -280,15 +280,20 @@ namespace BenefitsCalculation
 
         bool passedFirstDependentField = false;
 
+        /// <summary>
+        /// Submits a brand new employee with dependents, or adds a dependent to an existing
+        /// employee. The latter entails database updates for dependent status, cost, etc.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void button_submitEmployeeWithDependent_Click(object sender, EventArgs e)
         {
-            if (incomingEmployeeID == 0)
+            if (incomingEmployeeID == 0) // if the employee is brand new
             {
                 string emp_fName = TextBox_EmployeeFirstName.Text;
                 string emp_lName = TextBox_EmployeeLastName.Text;
                 Employee newEmployee = createStandardEmployeeWithDependents(emp_fName, emp_lName);
 
-                // add the new employee and generate their db id
                 using (var db = new BenefitsContext())
                 {
                     db.Employees.Add(newEmployee);
@@ -305,10 +310,20 @@ namespace BenefitsCalculation
                     if (toUpdate.hasDependent == false)
                         toUpdate.hasDependent = true;
                     createDependentsFromFields(toUpdate);
+                    db.SaveChanges();
                 }
+                // redirect back to their closer details page
                 Response.Redirect($"CloserDetails?id={incomingEmployeeID}");
             }
         }
+
+        /// <summary>
+        /// Cancel button to take the user back to either the homepage, or the view
+        /// employees page. Depends on which page they accessed the add functionality
+        /// from.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void button_cancel_Click(object sender, EventArgs e)
         {
             if (!addingDependentsFromEmployee)
