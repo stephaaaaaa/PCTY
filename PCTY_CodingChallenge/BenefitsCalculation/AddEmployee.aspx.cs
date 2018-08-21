@@ -7,11 +7,13 @@ namespace BenefitsCalculation
 {
     public partial class AddEmployee : System.Web.UI.Page
     {
+        #region globals
         private Random generator;
         Employee empToAddDependents;
         private int incomingEmployeeID = 0;
         private bool addingDependentsFromEmployee = false;
         private bool passedFirstDependentField = false;
+        #endregion
 
         private void getIncomingEmployeeID()
         {
@@ -29,6 +31,7 @@ namespace BenefitsCalculation
             getIncomingEmployeeID();
             if (incomingEmployeeID != 0)
             {
+                // set dependent adding panels to invisible if adding to an existing employee
                 Panel_AddSingleEmployee.Visible = false;
                 Panel_AddDependents.Visible = true;
                 addingDependentsFromEmployee = true;
@@ -41,7 +44,7 @@ namespace BenefitsCalculation
                 employeeName.Text = $"Adding dependents to: {empToAddDependents.firstName} {empToAddDependents.lastName}";
                 panel_IncomingEmployeeInfo.Controls.Add(employeeName);
             }
-            else
+            else // have the add employee fields visible
             {
                 Panel_AddSingleEmployee.Visible = true;
                 Panel_AddDependents.Visible = false;
@@ -100,6 +103,15 @@ namespace BenefitsCalculation
         #endregion
 
         #region dependent creation helpers
+
+        /// <summary>
+        /// Creates a basic dependent and checks for their name beginning with an a, to adjust
+        /// cost as needed.
+        /// </summary>
+        /// <param name="employeeID"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <returns></returns>
         private Dependent createInitialDependent(int employeeID, string firstName, string lastName)
         {
             Dependent newDependent = new Dependent();
@@ -112,6 +124,12 @@ namespace BenefitsCalculation
             return newDependent;
         }
 
+        /// <summary>
+        /// Helper to cycle through many dependent fields, taking into account the two
+        /// different cases. 1) Adding a brand new employee with dependents, and 2)
+        /// Adding brand new dependents to an existing employee.
+        /// </summary>
+        /// <param name="newEmployee"></param>
         private void createDependentsFromFields(Employee newEmployee)
         {
             for (int i = 0; i < Request.Form.Count; i++)
@@ -192,15 +210,22 @@ namespace BenefitsCalculation
                 }
             }
         }
+
         #endregion
 
         #region Button functionality
 
+        /// <summary>
+        /// Cancels adding any more dependents, in the case where a user clicks "add dependents"
+        /// but then changes their mind. Adds the employee, and takes the user to the view employees
+        /// page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Button_SubmitEmployeeWithNoDependents_Click(object sender, EventArgs e)
         {
             string fname = TextBox_EmployeeFirstName.Text;
             string lname = TextBox_EmployeeLastName.Text;
-
 
             Employee newEmployee = createStandardEmployeeNoDependents(fname, lname);
 
@@ -212,8 +237,16 @@ namespace BenefitsCalculation
             Response.Redirect("~/ViewEmployees.aspx");
         }
 
+        /// <summary>
+        /// Create the employee based off of their text boxes being filled;
+        /// then cycle through the form's viewstate to collect information
+        /// from the generated text boxes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void Button_SubmitWithDependents_Click(object sender, EventArgs e)
         {
+            /// PART 1: CREATE THE EMPLOYEE AND ADD THEM TO DB
             string employee_fname = TextBox_EmployeeFirstName.Text;
             string employee_lname = TextBox_EmployeeLastName.Text;
 
@@ -223,9 +256,12 @@ namespace BenefitsCalculation
                 db.Employees.Add(newEmployee);
                 db.SaveChanges();
             }
+
+            /// PART 2: CYCLE THROUGH ALL YOUR FIELDS AND ADD DEPENDENTS BASED ON THE EXISTING
+            /// FIELDS
             for (int i = 0; i < Request.Form.Count; i++)
             {
-                if (Request.Form.AllKeys[i].Contains("dep_FirstName")) // indicates that the text boxes exist
+                if (Request.Form.AllKeys[i].Contains("dep_FirstName")) // indicates that the text boxes for names exist
                 {
                     Dependent newDependent = new Dependent();
                     newDependent.cost = 500;
@@ -236,9 +272,7 @@ namespace BenefitsCalculation
                     string[] ControlName = Request.Form.AllKeys[i].Substring(ParamStartPoint, ParamNameLength).Split('$');
 
                     if (ControlName[0] == "dep_FirstName")
-                    {
                         newDependent.firstName = Request.Form[i];
-                    }
                     i++;
                     if (Request.Form.AllKeys[i].Contains("dep_LastName")) // indicates that the text boxes exist
                     {
@@ -248,14 +282,11 @@ namespace BenefitsCalculation
                         string[] ControlName2 = Request.Form.AllKeys[i].Substring(ParamStartPoint2, ParamNameLength2).Split('$');
 
                         if (ControlName2[0] == "dep_LastName")
-                        {
                             newDependent.lastName = Request.Form[i];
-                        }
                     }
                     apply10PercentOffIfApplicable(newDependent);
                     newEmployee.cost += newDependent.cost;
-                    newDependent.employeeID = newEmployee.employeeID;
-                    //newDependent.Employee.id = newEmployee.id;
+                    newDependent.employeeID = newEmployee.employeeID; // we have the info to add the dependent!
                     using (var db = new BenefitsContext())
                     {
                         db.Dependents.Add(newDependent);
@@ -271,6 +302,11 @@ namespace BenefitsCalculation
             Response.Redirect("~/ViewEmployees.aspx");
         }
 
+        /// <summary>
+        /// Makes visible the jquery fields to produce up to 30 dependents.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void button_addDependents_Click(object sender, EventArgs e)
         {
             button_cancel.Visible = false;
