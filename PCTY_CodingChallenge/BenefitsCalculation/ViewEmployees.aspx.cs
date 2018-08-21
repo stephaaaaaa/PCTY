@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace BenefitsCalculation
@@ -127,11 +125,13 @@ namespace BenefitsCalculation
             }
         }
 
-        private void Button_Delete_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Get the employee ID from the form's view state, since the IDs are generated
+        /// along with each View Details button's ID. From there, redirect to the
+        /// appropriate closer details page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_ViewDetails_Click(object sender, EventArgs e)
         {
             string[] buttonIDComponents = new string[0];
